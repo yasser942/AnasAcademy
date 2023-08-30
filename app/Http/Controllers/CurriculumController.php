@@ -48,6 +48,8 @@ class CurriculumController extends Controller
      */
     public function show(string $id)
     {
+        $curriculum = Curriculum::with('levels')->findOrFail($id);
+        return view('templates/curriculums/show', compact('curriculum'));
 
     }
 

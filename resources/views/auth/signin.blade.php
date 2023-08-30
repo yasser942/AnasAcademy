@@ -41,6 +41,8 @@
 
 		<!--- Animations css-->
 		<link href="../../assets/css/animate.css" rel="stylesheet">
+        <!--Internal   Notify -->
+        <link href="{{asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 
 	</head>
 	<body class="main-body bg-light">
@@ -127,6 +129,9 @@
 
 		<!-- custom js -->
 		<script src="../../assets/js/custom.js"></script>
+        <!--Internal  Notify js -->
+        <script src="{{asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+        <script src="{{asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
 	</body>
 </html>

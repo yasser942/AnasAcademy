@@ -4,19 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Level;
-class Curriculum extends Model
-{
-    protected $table = 'curriculums';
-    use HasFactory;
 
+class Level extends Model
+{
+    use HasFactory;
     protected $fillable = [
         'name',
         'description',
         'status',
     ];
-    public function levels()
+    public function curriculum()
     {
-        return $this->hasMany(\App\Models\Level::class);
+        return $this->belongsTo(Curriculum::class);
+    }
+    public function units ()
+    {
+        return $this->hasMany(Unit::class);
     }
 }

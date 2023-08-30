@@ -50,7 +50,7 @@
 			<img src="../../assets/img/loader.svg" class="loader-img" alt="Loader">
 		</div>
 		<!-- /Loader -->
-        @include('templates.components.validation-message')
+        @include('templates.components.validation-messages')
 		<!-- Page -->
 		<div class="page">
 

@@ -9,23 +9,24 @@
 
     @include('templates.components.validation-messages')
     <div class="card-body pt-0">
-        <form  method="POST" action="{{route('curriculum.update',$curriculum->id)}}">
+        <form  method="POST" action="{{route('level.update',$level->id)}}">
             @csrf
             @method('PUT')
+            <input type="hidden" name="curriculum_id" value="{{$level->curriculum_id}}">
 
             <div class="form-group">
                 <label for="exampleInputEmail1">الاسم</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="اسم المنهج" name="name" value="{{$curriculum->name}}">
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="اسم المستوى" name="name" value="{{$level->name}}">
             </div>
             <div class="form-group">
                 <label for="Textarea">الوصف</label>
-                <textarea class="form-control" placeholder="وصف المنهج" rows="3" name="description" > {{$curriculum->description}}</textarea>
+                <textarea class="form-control" placeholder="وصف المستوى" rows="3" name="description" > {{$level->description}}</textarea>
             </div>
             <div class="form-group">
-                <p class="mg-b-10">حالة المنهج</p>
+                <p class="mg-b-10">حالة المستوى</p>
                 <select class="form-control select2-no-search" name="status">
-                    <option value="{{$curriculum->status}}">
-                        {{$curriculum->status=='active'? 'مفعل':'غير مفعل'}}
+                    <option value="{{$level->status}}">
+                        {{$level->status=='active'? 'مفعل':'غير مفعل'}}
                     </option>
                     <option value="active">
                         مفعل
@@ -44,7 +45,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث المنهج</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث المستوى</button>
 
         </form>
     </div>
