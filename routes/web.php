@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurriculumController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,15 @@ Route::middleware([
         Route::get('/edit/{id}', 'edit')->name('unit.edit');
         Route::put('/update/{id}', 'update')->name('unit.update');
         Route::delete('/delete/{id}', 'destroy')->name('unit.delete');
+    });
+    Route::prefix('lesson')->controller(LessonController::class)->group(function () {
+        Route::get('/', 'index')->name('lesson.index');
+        Route::get('/create/{id}', 'create')->name('lesson.create');
+        Route::get('/show/{id}', 'show')->name('lesson.show');
+        Route::post('/store', 'store')->name('lesson.store');
+        Route::get('/edit/{id}', 'edit')->name('lesson.edit');
+        Route::put('/update/{id}', 'update')->name('lesson.update');
+        Route::delete('/delete/{id}', 'destroy')->name('lesson.delete');
     });
 });
 

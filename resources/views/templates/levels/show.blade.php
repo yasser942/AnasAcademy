@@ -26,31 +26,44 @@
             </div>
         @else
             @foreach($level->units as $unit)
-                <div class="col-12 col-sm-6 col-lg-6 col-xl-3">
+                <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
                     <div class="card card-success">
                         <div class="card-header pb-0">
-                            <h5 class="card-title mb-0 pb-0">Card title</h5>
+                            <a href="{{route('unit.show',$unit->id)}}"><h5 class="card-title mb-0 pb-0">{{$unit->name}}</h5></a>
                         </div>
                         <div class="card-body text-success">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            {{$unit->description}}
                         </div>
-                        <div class="card-footer">
-                            @if($level->status=='active')
+                        <div class="card-footer d-flex align-items-center">
+                            <form method="POST" action="{{route('unit.delete',$unit->id)}}" class="ml-2">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                    <i class="typcn typcn-trash"></i>
+                                </button>
+                            </form>
+
+                            <a href="{{route('unit.edit',$unit->id)}}" class="btn btn-info btn-icon mr-2">
+                                <i class="typcn typcn-edit"></i>
+                            </a>
+
+                            @if($unit->status=='active')
                                 <span class="badge badge-pill badge-success mr-2">مفعل</span>
                             @else
                                 <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
-
                             @endif
 
                             <span class="badge badge-pill badge-danger-transparent mr-2">{{$level->name}}</span>
-                            <span class="badge badge-pill badge-success-transparent mr-2">عدد الدروس {{0}}  </span>
+                            <span class="badge badge-pill badge-success-transparent mr-2">عدد الدروس {{count($unit->lessons)}}  </span>
                         </div>
                     </div>
                 </div>
             @endforeach
         @endif
-
-
     </div>
+
+
+
 
 @endsection

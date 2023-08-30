@@ -52,7 +52,9 @@ class UnitController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $unit =Unit::with('lessons')->findOrFail($id);
+
+        return view('templates/units/show',compact('unit'));
     }
 
     /**
@@ -60,15 +62,21 @@ class UnitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $unit= Unit::findOrFail($id);
+        return view('templates/units/edit',compact('unit'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateUnitRequest $request, string $id)
     {
-        //
+        $unit= Unit::findOrFail($id);
+        $data=$request->validated();
+        $unit->update($data);
+
+        return redirect()->route('level.show',[$unit->level_id])->with('success','تم تعديل الوحدة بنجاح');
+
     }
 
     /**
@@ -76,6 +84,10 @@ class UnitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $unit=Unit::findOrFail($id);
+        $unit->delete();
+        if ($unit){
+            return redirect()->route('level.show',[$unit->level_id])->with('success','تم حذف الوحدة بنجاح');
+        }
     }
 }
