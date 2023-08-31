@@ -1,8 +1,4 @@
-<!---Internal Fileupload css-->
-<link href="{{asset('assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 
-<!---Internal Fancy uploader css-->
-<link href="{{asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
 @extends('templates.components.index')
 
 @section('content')

@@ -43,6 +43,7 @@
                                     <thead>
                                     <tr>
                                         <th class="wd-lg-8p"><span>اسم الدرس</span></th>
+                                        <th class="wd-lg-8p"><span>وصف الدرس</span></th>
                                         <th class="wd-lg-20p"><span>تاريخ الإنشاء</span></th>
                                         <th class="wd-lg-20p"><span>الحالة</span></th>
                                         <th class="wd-lg-20p">إجراء</th>
@@ -52,7 +53,8 @@
                                     @foreach($unit->lessons as $lesson)
                                         <tr>
 
-                                            <td>{{$lesson->name}}</td>
+                                            <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a></td>
+                                            <td>{{$lesson-> description}}</td>
                                             <td>
                                                 {{$lesson->created_at->diffForHumans() }}
                                             </td>

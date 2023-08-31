@@ -14,7 +14,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -53,7 +53,8 @@ class LessonController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $lesson =Lesson::with('pdfs')->findOrFail($id);
+        return view('templates/lessons/show',compact('lesson'));
     }
 
     /**

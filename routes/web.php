@@ -3,7 +3,10 @@
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\UnitController;
+use App\Models\PDF;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +68,18 @@ Route::middleware([
         Route::put('/update/{id}', 'update')->name('lesson.update');
         Route::delete('/delete/{id}', 'destroy')->name('lesson.delete');
     });
+
+    Route::prefix('pdf')->controller(PDFController::class)->group(function () {
+        Route::get('/', 'index')->name('pdf.index');
+        Route::get('/create/{id}', 'create')->name('pdf.create');
+        Route::get('/show/{id}', 'show')->name('pdf.show');
+        Route::post('/store', 'store')->name('pdf.store');
+        Route::get('/edit/{id}', 'edit')->name('pdf.edit');
+        Route::put('/update/{id}', 'update')->name('pdf.update');
+        Route::delete('/delete/{id}', 'destroy')->name('pdf.delete');
+    });
+
+
 });
 
 

@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model
+class PDF extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'unit_id',
         'name',
         'description',
         'status',
+        'link',
+        'lesson_id',
     ];
-    public function unit()
+    public function lesson()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Lesson::class);
     }
-    public function pdfs()  { return $this->hasMany(PDF::class); }
 }
