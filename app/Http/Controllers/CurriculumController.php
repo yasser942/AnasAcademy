@@ -81,6 +81,7 @@ class CurriculumController extends Controller
     {
         $curriculum= curriculum::findOrFail($id);
         if ($curriculum){
+
             $curriculum->delete();
 
             return redirect()->route('curriculum.index')->with('success','تم حذف المنهج بنجاح');
