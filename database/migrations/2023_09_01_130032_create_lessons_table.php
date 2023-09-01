@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('p_d_f_s', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lesson_id')->constrained();
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('type')->default('pdf');
-            $table->string('link');
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'passive'])->default('passive');
             $table->timestamps();
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('p_d_f_s');
+        Schema::dropIfExists('lessons');
     }
 };

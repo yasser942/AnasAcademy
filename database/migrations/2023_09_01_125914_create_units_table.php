@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
+
             $table->id();
-            $table->foreignId('lesson_id')->constrained();
+            $table->foreignId('level_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->enum('type', ['text', 'pdf', 'video', 'test']); // Enum constraint
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'passive'])->default('passive');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resources');
+        Schema::dropIfExists('units');
     }
 };
