@@ -4,9 +4,11 @@ use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PdfController;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
+use App\Livewire\QuestionOptionManager;
 use App\Models\PDF;
+use App\Models\Test;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +80,24 @@ Route::middleware([
         Route::put('/update/{id}', 'update')->name('pdf.update');
         Route::delete('/delete/{id}', 'destroy')->name('pdf.delete');
     });
+
+    Route::prefix('test')->controller(TestController::class)->group(function () {
+        Route::get('/', 'index')->name('test.index');
+        Route::get('/create/{id}', 'create')->name('test.create');
+        Route::get('/show/{id}', 'show')->name('test.show');
+        Route::post('/store', 'store')->name('test.store');
+        Route::get('/edit/{id}', 'edit')->name('test.edit');
+        Route::put('/update/{id}', 'update')->name('test.update');
+        Route::delete('/delete/{id}', 'destroy')->name('test.delete');
+    });
+
+    Route::get('/question/create/{id}', function ($id){
+
+        $test=  Test::findOrFail($id);
+        return view('templates/resources/tests/create-question', compact('test'));
+    })->name('question.create');
+
+
 
 
 });
