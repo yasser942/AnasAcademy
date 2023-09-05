@@ -4,8 +4,11 @@ use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\VideoController;
+use App\Livewire\QuestionCreator;
 use App\Livewire\QuestionOptionManager;
 use App\Models\PDF;
 use App\Models\Test;
@@ -80,6 +83,15 @@ Route::middleware([
         Route::put('/update/{id}', 'update')->name('pdf.update');
         Route::delete('/delete/{id}', 'destroy')->name('pdf.delete');
     });
+    Route::prefix('video')->controller(VideoController::class)->group(function () {
+        Route::get('/', 'index')->name('video.index');
+        Route::get('/create/{id}', 'create')->name('video.create');
+        Route::get('/show/{id}', 'show')->name('video.show');
+        Route::post('/store', 'store')->name('video.store');
+        Route::get('/edit/{id}', 'edit')->name('video.edit');
+        Route::put('/update/{id}', 'update')->name('video.update');
+        Route::delete('/delete/{id}', 'destroy')->name('video.delete');
+    });
 
     Route::prefix('test')->controller(TestController::class)->group(function () {
         Route::get('/', 'index')->name('test.index');
@@ -91,11 +103,7 @@ Route::middleware([
         Route::delete('/delete/{id}', 'destroy')->name('test.delete');
     });
 
-    Route::get('/question/create/{id}', function ($id){
-
-        $test=  Test::findOrFail($id);
-        return view('templates/resources/tests/create-question', compact('test'));
-    })->name('question.create');
+    Route::get('question/{id}',[QuestionController::class,'create'])->name('question.create');
 
 
 

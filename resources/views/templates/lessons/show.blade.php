@@ -20,7 +20,7 @@
                 <a href="{{route('pdf.create',$lesson->id)}}" class="dropdown-item">PDF</a>
                 <a href="" class="dropdown-item">نص</a>
                 <a href="{{route('test.create',$lesson->id)}}" class="dropdown-item">إختبار</a>
-                <a href="" class="dropdown-item">فيديو</a>
+                <a href="{{route('video.create',$lesson->id)}}" class="dropdown-item">فيديو</a>
             </div><!-- dropdown-menu --></div>
     </div>
 
@@ -31,13 +31,51 @@
                 <h5 class="mg-b-10 mg-t-15 tx-18">لا يوجد شيء لعرضه</h5>
             </div>
         @else
+            @foreach($lesson->videos as $video)
+                <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                    <div class="card card-success">
+                        <div class="card-header pb-0">
+                            <a href="{{route('video.show',$video->id)}}"><h5 class="card-title mb-0 pb-0">{{$video->name}}</h5></a>
+                        </div>
+                        <div class="card-body text-success">
+                            {{$video->description}}
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                    <i class="typcn typcn-trash"></i>
+                                </button>
+                            </form>
+
+                            <a href="{{route('video.edit',$video->id)}}" class="btn btn-info btn-icon mr-2">
+                                <i class="typcn typcn-edit"></i>
+                            </a>
+
+                            @if($video->status=='active')
+                                <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                            @else
+                                <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                            @endif
+
+                            <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                            <span class="badge badge-pill badge-primary-transparent mr-2">فيديو</span>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
             @foreach($lesson->pdfs as $pdf)
                 <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-                    <div class="card card-warning">
+                    <div class="card card-primary">
                         <div class="card-header pb-0">
                             <a href="{{route('pdf.show',$pdf->id)}}"><h5 class="card-title mb-0 pb-0">{{$pdf->name}}</h5></a>
                         </div>
-                        <div class="card-body text-warning">
+                        <div class="card-body text-primary">
                             {{$pdf->description}}
                         </div>
                         <div class="card-footer d-flex align-items-center">

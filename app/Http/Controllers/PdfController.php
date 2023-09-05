@@ -46,7 +46,7 @@ class PdfController extends Controller
         $pdf->save();
 
         if ($pdf){
-            return redirect()->route('lesson.show',[$pdf->lesson_id])->with('success','تم اضافة الدرس بنجاح');
+            return redirect()->route('lesson.show',[$pdf->lesson_id])->with('success','تم اضافة المصدر بنجاح');
         }
     }
 
