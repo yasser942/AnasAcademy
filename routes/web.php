@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\WordCategoryController;
 use App\Livewire\QuestionCreator;
 use App\Livewire\QuestionOptionManager;
 use App\Models\PDF;
@@ -101,6 +103,28 @@ Route::middleware([
         Route::get('/edit/{id}', 'edit')->name('test.edit');
         Route::put('/update/{id}', 'update')->name('test.update');
         Route::delete('/delete/{id}', 'destroy')->name('test.delete');
+    });
+
+    Route::prefix('word-category')->controller(WordCategoryController::class)->group(function () {
+        Route::get('/', 'index')->name('word-category.index');
+        Route::get('/create', 'create')->name('word-category.create');
+        Route::get('/show/{id}', 'show')->name('word-category.show');
+        Route::post('/store', 'store')->name('word-category.store');
+        Route::get('/edit/{id}', 'edit')->name('word-category.edit');
+        Route::put('/update/{id}', 'update')->name('word-category.update');
+        Route::delete('/delete/{id}', 'destroy')->name('word-category.delete');
+    });
+    Route::prefix('card')->controller(CardController::class)->group(function () {
+        Route::get('/', 'index')->name('card.index');
+        Route::get('/create/{id}', 'create')->name('card.create');
+        Route::get('/show/{id}', 'show')->name('card.show');
+        Route::post('/store', 'store')->name('card.store');
+        Route::get('/edit/{id}', 'edit')->name('card.edit');
+        Route::put('/update/{id}', 'update')->name('card.update');
+        Route::delete('/delete/{id}', 'destroy')->name('card.delete');
+        Route::post('add-to-favorite/{id}', 'addToFavorite')->name('card.add-to-favorite');
+        Route::post('delete-favorite/{id}', 'deleteFavorite')->name('card.delete-favorite');
+        Route::get('favorite', 'favorite')->name('card.favorite');
     });
 
     Route::get('question/{id}',[QuestionController::class,'create'])->name('question.create');

@@ -16,12 +16,11 @@
     @endif
 
     <div class="row row-xs wd-xl-80p">
-        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('lesson.create',$unit->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء درس جديد</a></div>
-        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><button class="btn btn-outline-secondary btn-rounded btn-block">Secondary</button></div>
+        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('word-category.create')}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء مجموعة جديدة</a></div>
     </div>
 
     <div class="row mt-4">
-        @if(count($unit->lessons)==0)
+        @if(count($wordCategories)==0)
             <div class="card-body text-center">
                 <img src="{{asset('assets/img/svgicons/note_taking.svg')}}" alt="" class="wd-35p">
                 <h5 class="mg-b-10 mg-t-15 tx-18">لا يوجد شيء لعرضه</h5>
@@ -42,23 +41,28 @@
                                 <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                     <thead>
                                     <tr>
-                                        <th class="wd-lg-8p"><span>اسم الدرس</span></th>
-                                        <th class="wd-lg-8p"><span>وصف الدرس</span></th>
+                                        <th class="wd-lg-8p"><span>اسم المجموعة</span></th>
+                                        <th class="wd-lg-8p"><span>وصف المجموعة</span></th>
                                         <th class="wd-lg-20p"><span>تاريخ الإنشاء</span></th>
+                                        <th class="wd-lg-20p"><span>عدد الكلمات</span></th>
                                         <th class="wd-lg-20p"><span>الحالة</span></th>
                                         <th class="wd-lg-20p">إجراء</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($unit->lessons as $lesson)
+                                    @foreach($wordCategories as $category)
                                         <tr>
 
-                                            <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a></td>
-                                            <td>{{$lesson-> description}}</td>
+                                            <td><a href="{{route('word-category.show',$category->id)}}">{{$category->name}}</a></td>
+                                            <td>{{$category-> description}}</td>
+
                                             <td>
-                                                {{$lesson->created_at->diffForHumans() }}
+                                                {{$category->created_at->diffForHumans() }}   <div class="badge bg-success text-white ">جديد</div>
+
                                             </td>
-                                            @if($lesson->status =='active')
+                                            <td>{{$category-> cards->count()}}</td>
+
+                                        @if($category->status =='active')
                                                 <td class="text-center">
                                                     <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
                                                 </td>
@@ -72,14 +76,14 @@
                                             <td>
 
                                                 <div class="btn-icon-list">
-                                                    <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
+                                                    <form method="POST" action="{{route('word-category.delete',$category->id)}}" class="ml-2">
                                                         @csrf
                                                         @method('DELETE')
 
                                                         <button  class="btn btn-danger btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
                                                     </form>
 
-                                                    <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                    <a href="{{route('word-category.edit',$category->id)}}" class="btn btn-info btn-icon"><i class="typcn typcn-edit"></i></a>
                                                    </div>
 
                                             </td>

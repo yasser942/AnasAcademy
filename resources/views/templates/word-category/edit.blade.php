@@ -5,24 +5,23 @@
 
     @include('templates.components.validation-messages')
     <div class="card-body pt-0">
-        <form  method="POST" action="{{route('unit.update',$unit->id)}}">
+        <form  method="POST" action="{{route('word-category.update',$category->id)}}">
             @csrf
             @method('PUT')
-            <input type="hidden" name="level_id" value="{{$unit->level_id}}">
 
             <div class="form-group">
                 <label for="exampleInputEmail1">الاسم</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="اسم الوحدة" name="name" value="{{$unit->name}}">
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="اسم المجموعة" name="name" value="{{$category->name}}">
             </div>
             <div class="form-group">
                 <label for="Textarea">الوصف</label>
-                <textarea class="form-control" placeholder="وصف الوحدة" rows="3" name="description" > {{$unit->description}}</textarea>
+                <textarea class="form-control" placeholder="وصف المجموعة" rows="3" name="description" > {{$category->description}}</textarea>
             </div>
             <div class="form-group">
-                <p class="mg-b-10">حالة الوحدة</p>
+                <p class="mg-b-10">حالة المجموعة</p>
                 <select class="form-control select2-no-search" name="status">
-                    <option value="{{$unit->status}}">
-                        {{$unit->status=='active'? 'مفعل':'غير مفعل'}}
+                    <option value="{{$category->status}}">
+                        {{$category->status=='active'? 'مفعل':'غير مفعل'}}
                     </option>
                     <option value="active">
                         مفعل
@@ -33,15 +32,9 @@
 
                 </select>
             </div>
-            <div class="form-group">
-                <div >
-                    <label for="Textarea">الرجاء إدراج صورة</label>
 
-                    <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200"  />
-                </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث الوحدة</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث المجموعة</button>
 
         </form>
     </div>
