@@ -3,21 +3,11 @@
     \Carbon\Carbon::setLocale('ar');
 @endphp
 @section('content')
-    @if(session('success'))
+    @include('templates.components.session-messages')
 
-        <script>
-
-
-            // Automatically trigger the function when the page loads
-            window.onload = function() {
-                not7('نجاح ', "{{session('success')}}");
-            };
-        </script>
-    @endif
 
     <div class="row row-xs wd-xl-80p">
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('lesson.create',$unit->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء درس جديد</a></div>
-        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><button class="btn btn-outline-secondary btn-rounded btn-block">Secondary</button></div>
     </div>
 
     <div class="row mt-4">

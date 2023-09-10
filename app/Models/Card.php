@@ -23,5 +23,9 @@ class Card extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 
 }

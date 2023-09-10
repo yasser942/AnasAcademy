@@ -1,24 +1,14 @@
 @extends('templates.components.index')
 
 @section('content')
-    @if(session('success'))
+    @include('templates.components.session-messages')
 
-        <script>
-
-
-            // Automatically trigger the function when the page loads
-            window.onload = function() {
-                not7('نجاح ', "{{session('success')}}");
-            };
-        </script>
-    @endif
 
     <div class="row row-xs wd-xl-80p">
 
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"> <button data-toggle="dropdown" class="btn btn-indigo btn-block">إنشاء مصدر <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i></button>
             <div class="dropdown-menu">
                 <a href="{{route('pdf.create',$lesson->id)}}" class="dropdown-item">PDF</a>
-                <a href="" class="dropdown-item">نص</a>
                 <a href="{{route('test.create',$lesson->id)}}" class="dropdown-item">إختبار</a>
                 <a href="{{route('video.create',$lesson->id)}}" class="dropdown-item">فيديو</a>
             </div><!-- dropdown-menu --></div>

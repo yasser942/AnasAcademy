@@ -15,7 +15,6 @@
 
     <div class="row row-xs wd-xl-80p">
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('curriculum.create')}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء منهج جديد</a></div>
-        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><button class="btn btn-outline-secondary btn-rounded btn-block">Secondary</button></div>
     </div>
 
 

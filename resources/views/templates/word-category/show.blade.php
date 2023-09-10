@@ -11,7 +11,7 @@
             <h5 class="mg-b-10 mg-t-15 tx-18">لا يوجد شيء لعرضه</h5>
         </div>
     @else
-        <div class="col-lg-6 col-md-6 mx-auto">
+        <div class="col-lg-12 col-md-12 mx-auto">
             <div class="card custom-card">
                 <div class="card-body ht-100p">
 
@@ -22,7 +22,7 @@
                                     @if($loop->first)
                                         <div class="carousel-item active">
                                             <div class="panel price panel-color">
-                                                <div class="badge bg-success text-white m-2 ">جديد</div>
+
                                                 <div class="panel-heading bg-primary p-0 text-center">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
@@ -57,9 +57,13 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            @livewire('favorite', ['cardId' => $card->id])
+
+                                                            @livewire('favorite-button', ['cardId' => $card->id])
 
                                                         </div>
+                                                        @if ($card->isNew())
+                                                            <div class="badge bg-success text-white m-2 ">جديد</div>
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -68,7 +72,7 @@
                                     @else
                                         <div class="carousel-item">
                                             <div class="panel price panel-color">
-                                                <div class="badge bg-success text-white m-2 ">جديد</div>
+
                                                 <div class="panel-heading bg-primary p-0 text-center">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
@@ -103,9 +107,11 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            @livewire('favorite', ['cardId' => $card->id])
-
-                                                        </div>                                                    </div>
+                                                            @livewire('favorite-button', ['cardId' => $card->id])
+                                                        </div>
+                                                        @if ($card->isNew())
+                                                            <div class="badge bg-success text-white m-2 ">جديد</div>
+                                                        @endif</div>
                                                 </div>
 
                                             </div>

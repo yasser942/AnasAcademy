@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"> <!-- Add this line for your custom CSS -->
 
         <!-- Styles -->
         @livewireStyles
@@ -21,7 +22,7 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+
 
             <!-- Page Heading -->
             @if (isset($header))

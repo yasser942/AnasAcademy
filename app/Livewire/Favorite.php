@@ -3,39 +3,29 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Favorite extends Component
 {
+    use WithPagination;
 
-    public $cardId;
-    public $isFavorite;
 
-    public function mount($cardId)
+
+
+
+
+
+    public function deleteFavorite($cardId)
     {
-        $this->cardId = $cardId;
-        $this->isFavorite = $this->isCardFavorite();
-    }
 
-    public function toggleFavorite()
-    {
-        if ($this->isFavorite) {
-            // Remove from favorites
-            auth()->user()->cards()->detach($this->cardId);
-        } else {
-            // Add to favorites
-            auth()->user()->cards()->attach($this->cardId);
-        }
-
-        $this->isFavorite = $this->isCardFavorite();
+        auth()->user()->cards()->detach($cardId);
     }
 
     public function render()
     {
-        return view('livewire.favorite');
+        $cards = auth()->user()->cards()->get();
+        return view('livewire.favorite',['cards' => $cards]);
     }
 
-    private function isCardFavorite()
-    {
-        return auth()->user()->cards()->where('card_id', $this->cardId)->exists();
-    }
+
 }

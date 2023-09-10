@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CurriculumController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\ExamQuestionController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WordCategoryController;
 use App\Livewire\QuestionCreator;
@@ -30,15 +33,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('pricing', function () {
+    return view('templates.pricing');
+})->name('pricing');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'checkplan'
+
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('templates/main');
     })->name('dashboard');
+
+    Route::prefix('user')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index')->name('user.index');
+        Route::get('/create', 'create')->name('user.create');
+        Route::get('/show/{id}', 'show')->name('user.show');
+        Route::post('/store', 'store')->name('user.store');
+        Route::get('/edit/{id}', 'edit')->name('user.edit');
+        Route::put('/update/{id}', 'update')->name('user.update');
+        Route::delete('/delete/{id}', 'destroy')->name('user.delete');
+    });
+
+
     Route::prefix('curriculum')->controller(CurriculumController::class)->group(function () {
         Route::get('/', 'index')->name('curriculum.index');
         Route::get('/create', 'create')->name('curriculum.create');
@@ -126,6 +146,19 @@ Route::middleware([
         Route::post('delete-favorite/{id}', 'deleteFavorite')->name('card.delete-favorite');
         Route::get('favorite', 'favorite')->name('card.favorite');
     });
+
+    Route::prefix('exam')->controller(ExamController::class)->group(function () {
+        Route::get('/', 'index')->name('exam.index');
+        Route::get('/create', 'create')->name('exam.create');
+        Route::get('/show/{id}', 'show')->name('exam.show');
+        Route::post('/store', 'store')->name('exam.store');
+        Route::get('/edit/{id}', 'edit')->name('exam.edit');
+        Route::put('/update/{id}', 'update')->name('exam.update');
+        Route::delete('/delete/{id}', 'destroy')->name('exam.delete');
+    });
+
+    Route::get('exam-question/{id}',[ExamQuestionController::class,'create'])->name('exam-question.create');
+
 
     Route::get('question/{id}',[QuestionController::class,'create'])->name('question.create');
 

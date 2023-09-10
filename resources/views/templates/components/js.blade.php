@@ -102,6 +102,9 @@
 <!--Internal  Datatable js -->
 <script src="{{asset('assets/js/table-data.js')}}"></script>
 
+
+
+
 <script>
     function confirmDelete(form ,msg) {
         if (confirm(msg)) {
