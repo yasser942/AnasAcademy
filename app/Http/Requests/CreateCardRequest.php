@@ -26,6 +26,7 @@ class CreateCardRequest extends FormRequest
             'word_translation' => 'required|string',
             'sentence' => 'required|string',
             'sentence_translation' => 'required|string',
+            'audio' => 'required|file|mimes:mp3,wav',
             'word_category_id' => 'required|exists:word_categories,id',
         ];
     }

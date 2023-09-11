@@ -13,6 +13,7 @@ class Card extends Model
         'word',
         'word_translation',
         'sentence',
+        'audio',
         'sentence_translation',
     ];
     public function wordCategory()

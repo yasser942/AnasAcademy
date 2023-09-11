@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCardRequest;
 use App\Models\Card;
 use App\Models\WordCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CardController extends Controller
 {
@@ -35,10 +36,25 @@ class CardController extends Controller
     {
         $id = $request->word_category_id;
         $wordCategory = WordCategory::findOrFail($id);
-        $request['word_category_id'] = $wordCategory->id;
-        $wordCategory->cards()->create($request->validated());
-        return redirect()->route('word-category.show', $id)->with('success', 'تم إضافة الكلمة بنجاح');
-    }
+
+
+
+        // Handle the uploaded audio file
+        if ($request->hasFile('audio')) {
+            $audioFile = $request->file('audio');
+            $audioFileName = hash('sha256', time() . $audioFile->getClientOriginalName()) . '.' . $audioFile->getClientOriginalExtension();
+            $audioFile->storeAs('public/audio', $audioFileName); // Assuming you have a 'audio' disk in your filesystem config
+        } else {
+            $audioFileName = null;
+        }
+
+        // Create the card, including the audio file name
+        $cardData = $request->validated();
+        $cardData['audio'] = $audioFileName;
+
+        $wordCategory->cards()->create($cardData);
+
+        return redirect()->route('word-category.show', $id)->with('success', 'تم إضافة الكلمة بنجاح');}
 
 
     /**
@@ -77,31 +93,22 @@ class CardController extends Controller
     {
         try {
             $card = Card::findOrFail($id);
+
+            // Check if the card has an associated audio file
+            if ($card->audio) {
+                // Delete the audio file from storage
+                Storage::delete('public/audio/' . $card->audio);
+            }
+
+            // Delete the card
             $card->delete();
-            return redirect()->route('word-category.show',[$card->word_category_id ])->with('success', 'تم حذف الكلمة بنجاح');
+
+            return redirect()->route('word-category.show', [$card->word_category_id])->with('success', 'تم حذف الكلمة بنجاح');
         } catch (\Exception $e) {
-            return redirect()->route('word-category.show',[$card->word_category_id ])->with('error', 'حدث خطأ أثناء حذف الكلمة');
+            return redirect()->route('word-category.show', [$card->word_category_id])->with('error', 'حدث خطأ أثناء حذف الكلمة');
         }
     }
-    public function addToFavorite(Request $request)
-    {
 
-        $card = Card::findOrFail($request->id);
-        if ($card->users()->where('user_id', auth()->user()->id)->exists()) {
-
-            return redirect()->route('word-category.show', $card->id)->with('error', 'تم إضافة الكلمة إلى المفضلة من قبل');
-
-        } else {
-            $card->users()->attach(auth()->user()->id);
-            return redirect()->route('word-category.show', $card->wordCategory->id)->with('success', 'تم إضافة الكلمة إلى المفضلة بنجاح');
-        }
-    }
-    public function deleteFavorite(Request $request)
-    {
-        $card = Card::findOrFail($request->id);
-        $card->users()->detach(auth()->user()->id);
-        return redirect()->route('word-category.show', $card->id)->with('success', 'تم حذف الكلمة من المفضلة بنجاح');
-    }
      public function favorite()
      {
          $cards = auth()->user()->cards()->paginate(10);

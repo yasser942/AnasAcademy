@@ -50,7 +50,7 @@
 
 													</form>
 													<div class="main-signin-footer mt-5">
-														<p><a href="">نسيت كلمة المرور ؟</a></p>
+														<p><a href="{{route('password.email')}}">نسيت كلمة المرور ؟</a></p>
 														<p>ليس لديك حساب ؟ <a href="{{route('register')}}">إنشاء حساب جديد</a></p>
 													</div>
 												</div>

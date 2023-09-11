@@ -103,7 +103,20 @@
 <script src="{{asset('assets/js/table-data.js')}}"></script>
 
 
+<script>
+    $('#carouselExample2').on('slide.bs.carousel', function (e) {
+        // Get the currently active item (card)
+        var currentCard = $(e.relatedTarget);
 
+        // Find the iframe element within the current card
+        var iframeElement = currentCard.find('iframe')[0];
+
+        // Reload the iframe to stop audio playback
+        if (iframeElement) {
+            iframeElement.src = iframeElement.src;
+        }
+    });
+</script>
 
 <script>
     function confirmDelete(form ,msg) {

@@ -7,6 +7,7 @@ use App\Http\Controllers\ExamQuestionController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
@@ -33,10 +34,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('pricing', function () {
-    return view('templates.pricing');
-})->name('pricing');
-
+Route::prefix('plan')->controller(PlanController::class)->group(function () {
+    Route::get('/', 'index')->name('plan.index');
+    Route::get('/create', 'create')->name('plan.create');
+    Route::get('/show/{id}', 'show')->name('plan.show');
+    Route::post('/store', 'store')->name('plan.store');
+    Route::get('/edit/{id}', 'edit')->name('plan.edit');
+    Route::put('/update/{id}', 'update')->name('plan.update');
+    Route::delete('/delete/{id}', 'destroy')->name('plan.delete');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

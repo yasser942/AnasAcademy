@@ -37,7 +37,7 @@
                                         <th class="wd-lg-8p"><span>نوع المستخدم</span></th>
                                         <th class="wd-lg-8p"><span>الحالة</span></th>
                                         <th class="wd-lg-8p"><span>العضوية</span></th>
-                                        <th class="wd-lg-8p"><span>الوقت المتبقي</span></th>
+                                        <th class="wd-lg-8p"><span>الأيام المتبقية</span></th>
                                         <th class="wd-lg-8p"><span>الإيميل</span></th>
                                         <th class="wd-lg-20p"><span>تاريخ الإنشاء</span></th>
                                         <th class="wd-lg-20p">إجراء</th>
@@ -65,9 +65,12 @@
                                                 </td>
                                             @endif
                                             <td>
-                                                @foreach($user->plans as $plan)
-                                                    {{$plan->name}}
-                                                @endforeach
+                                                @if($user->currentPlan())
+                                                    {{$user->currentPlan()->name}}
+                                                @else
+                                                    <span class="label text-danger d-flex">لا يوجد</span>
+                                                @endif
+
                                             </td>
                                             <td>{{$user-> daysLeftInCurrentPlan()}}</td>
                                             <td>{{$user-> email}}</td>

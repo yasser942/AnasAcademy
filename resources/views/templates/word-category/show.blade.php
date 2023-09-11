@@ -23,16 +23,21 @@
                                         <div class="carousel-item active">
                                             <div class="panel price panel-color">
 
-                                                <div class="panel-heading bg-primary p-0 text-center">
+                                                <div class="panel-heading bg-primary p-0 text-center" style="text-transform: none;">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
                                                 <div class="panel-body text-center">
                                                     <p class="lead"><strong>{{$card->word_translation}}</strong>  </p>
                                                 </div>
                                                 <ul class="list-group list-group-flush text-center">
-                                                    <li class="list-group-item"> {{$card->sentence}}</li>
+                                                    <li class="list-group-item "style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
-
+                                                    <li class="list-group-item">
+                                                        <audio controls>
+                                                            <source src="{{Storage::url('audio/'.$card->audio)}}" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    </li>
 
                                                 </ul>
                                                 <div class="panel-footer text-center">
@@ -40,7 +45,7 @@
                                                 </div>
                                                 <div class="panel-footer text-center">
                                                     <div class="row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
                                                            <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
                                                                @csrf
                                                                @method('DELETE')
@@ -51,12 +56,12 @@
 
 
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
                                                             <a class="btn btn-warning" href="{{route('card.edit',$card->id)}}">
                                                                 <i class="fa fa-edit"></i> تعديل
                                                             </a>
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
 
                                                             @livewire('favorite-button', ['cardId' => $card->id])
 
@@ -73,15 +78,21 @@
                                         <div class="carousel-item">
                                             <div class="panel price panel-color">
 
-                                                <div class="panel-heading bg-primary p-0 text-center">
+                                                <div class="panel-heading bg-primary p-0 text-center" style="text-transform: none;">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
                                                 <div class="panel-body text-center">
                                                     <p class="lead"><strong>{{$card->word_translation}}</strong>  </p>
                                                 </div>
                                                 <ul class="list-group list-group-flush text-center">
-                                                    <li class="list-group-item"> {{$card->sentence}}</li>
+                                                    <li class="list-group-item" style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
+                                                    <li class="list-group-item">
+                                                        <audio controls>
+                                                            <source src="{{asset('storage/'.$card->audio)}}" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    </li>
 
 
                                                 </ul>
@@ -90,7 +101,7 @@
                                                 </div>
                                                 <div class="panel-footer text-center">
                                                     <div class="row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
                                                             <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -101,12 +112,12 @@
 
 
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
                                                             <a class="btn btn-warning" href="{{route('card.edit',$card->id)}}">
                                                                 <i class="fa fa-edit"></i> تعديل
                                                             </a>
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 mb-2">
                                                             @livewire('favorite-button', ['cardId' => $card->id])
                                                         </div>
                                                         @if ($card->isNew())

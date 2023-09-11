@@ -22,7 +22,7 @@ class CheckPlanExpiration
             // Check if the user has an active membership
             if ($user->isPlanExpired()) {
                 // Membership has expired, you can redirect to a membership renewal page or perform other actions
-                return redirect()->route('pricing')->with('error', 'خطأ! لقد انتهت صلاحية الاشتراك الخاص بك. يرجى تجديد الاشتراك للوصول إلى لوحة التحكم');
+                return redirect()->route('plan.index')->with('error', 'خطأ! لقد انتهت صلاحية الاشتراك الخاص بك. يرجى تجديد الاشتراك للوصول إلى لوحة التحكم');
             }
         }
 
