@@ -151,6 +151,7 @@ public  function isPlanExpired()
         $currentPlan = $this->currentPlan();
 
         if ($currentPlan) {
+
             $now = Carbon::now();
             $endDate = Carbon::parse($currentPlan->pivot->end_date);
 

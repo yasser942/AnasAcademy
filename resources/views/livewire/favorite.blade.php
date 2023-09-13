@@ -27,7 +27,14 @@
                                                 <ul class="list-group list-group-flush text-center">
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
+                                                    <li class="list-group-item">
+                                                        <audio controls controlslist="nodownload">
+                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
 
+
+                                                    </li>
 
                                                 </ul>
                                                 <div class="panel-footer text-center">
@@ -60,7 +67,14 @@
                                                 <ul class="list-group list-group-flush text-center">
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
+                                                    <li class="list-group-item">
+                                                        <audio controls controlslist="nodownload">
+                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
 
+
+                                                    </li>
 
                                                 </ul>
                                                 <div class="panel-footer text-center">

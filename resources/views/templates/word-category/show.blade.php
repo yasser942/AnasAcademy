@@ -33,10 +33,12 @@
                                                     <li class="list-group-item "style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <audio controls>
-                                                            <source src="{{Storage::url('audio/'.$card->audio)}}" type="audio/mpeg">
+                                                        <audio controls controlslist="nodownload">
+                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
                                                             Your browser does not support the audio element.
                                                         </audio>
+
+
                                                     </li>
 
                                                 </ul>
@@ -88,10 +90,12 @@
                                                     <li class="list-group-item" style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <audio controls>
-                                                            <source src="{{asset('storage/'.$card->audio)}}" type="audio/mpeg">
+                                                        <audio controls controlslist="nodownload">
+                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
                                                             Your browser does not support the audio element.
                                                         </audio>
+
+
                                                     </li>
 
 

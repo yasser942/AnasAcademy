@@ -103,22 +103,47 @@
 <script src="{{asset('assets/js/table-data.js')}}"></script>
 
 
+<!-- Include this JavaScript after your HTML audio elements -->
+
 <script>
-    $('#carouselExample2').on('slide.bs.carousel', function (e) {
-        // Get the currently active item (card)
-        var currentCard = $(e.relatedTarget);
+    let audioElements = document.querySelectorAll('audio');
+    let currentIndex = 0;
 
-        // Find the iframe element within the current card
-        var iframeElement = currentCard.find('iframe')[0];
-
-        // Reload the iframe to stop audio playback
-        if (iframeElement) {
-            iframeElement.src = iframeElement.src;
+    // Function to play the audio at the given index
+    function playAudio(index) {
+        if (audioElements[index]) {
+            audioElements[index].play();
         }
+    }
+
+    // Function to pause the audio at the given index
+    function pauseAudio(index) {
+        if (audioElements[index]) {
+            audioElements[index].pause();
+            audioElements[index].currentTime = 0;
+        }
+    }
+
+    // Listen for carousel slide events
+    $('#carouselExample2').on('slide.bs.carousel', function (e) {
+        pauseAudio(currentIndex); // Pause the current audio
+        currentIndex = e.to; // Update the current index
     });
 </script>
 
-<script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
     function confirmDelete(form ,msg) {
         if (confirm(msg)) {
             return true; // Proceed with form submission

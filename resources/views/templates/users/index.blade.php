@@ -72,7 +72,7 @@
                                                 @endif
 
                                             </td>
-                                            <td>{{$user-> daysLeftInCurrentPlan()}}</td>
+                                            <td>{{$user->daysLeftInCurrentPlan()}}</td>
                                             <td>{{$user-> email}}</td>
                                             <td>
                                                 {{$user->created_at->diffForHumans() }}

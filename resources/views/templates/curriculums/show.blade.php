@@ -21,7 +21,7 @@
 
             <div class="col-xl-4 col-lg-4 col-md-12">
                 <div class="card">
-                    <img class="card-img-top w-100" src="{{asset('assets/img/media/login.png')}}" alt="">
+                    <img class="card-img-top w-100" src="{{asset('assets/img/levels/a'.$loop->index.'.png')}}" alt="">
                     <div class="card-body">
                         <a href="{{route('level.show',$level->id)}}"><h4 class="card-title mb-3">{{$level->name}}</h4></a>
                         <p class="card-text">{{$level->description}}</p>

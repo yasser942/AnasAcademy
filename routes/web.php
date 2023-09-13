@@ -6,6 +6,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExamQuestionController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\QuestionController;
@@ -161,6 +162,16 @@ Route::middleware([
         Route::get('/edit/{id}', 'edit')->name('exam.edit');
         Route::put('/update/{id}', 'update')->name('exam.update');
         Route::delete('/delete/{id}', 'destroy')->name('exam.delete');
+    });
+
+    Route::prefix('notification')->controller(NotificationController::class)->group(function () {
+        Route::get('/', 'index')->name('notification.index');
+        Route::get('/create', 'create')->name('notification.create');
+        Route::get('/show/{id}', 'show')->name('notification.show');
+        Route::post('/store', 'store')->name('notification.store');
+        Route::get('/edit/{id}', 'edit')->name('notification.edit');
+        Route::put('/update/{id}', 'update')->name('notification.update');
+        Route::delete('/notifications/delete', 'delete')->name('notification.delete');
     });
 
     Route::get('exam-question/{id}',[ExamQuestionController::class,'create'])->name('exam-question.create');

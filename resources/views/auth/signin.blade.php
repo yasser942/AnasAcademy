@@ -36,7 +36,7 @@
                                                         @csrf
 
                                                         <div class="form-group">
-															<label>الإيميل</label> <input class="form-control" placeholder="أدخل الإيميل الخاص بك" type="text" name="email">
+															<label>الإيميل</label> <input class="form-control" placeholder="أدخل الإيميل الخاص بك" type="text" name="email" value="{{old('email')}}">
                                                             @error('email')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
