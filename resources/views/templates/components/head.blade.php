@@ -57,11 +57,12 @@
 
     <!---Internal Fancy uploader css-->
     <link href="{{asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+    <!-- Internal Morris Css-->
+    <link href="{{asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
 
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
 
 

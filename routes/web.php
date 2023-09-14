@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\ExamController;
@@ -51,9 +52,7 @@ Route::middleware([
     'checkplan'
 
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('templates/main');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class ,'index'])->name('dashboard');
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'index')->name('user.index');
@@ -171,7 +170,8 @@ Route::middleware([
         Route::post('/store', 'store')->name('notification.store');
         Route::get('/edit/{id}', 'edit')->name('notification.edit');
         Route::put('/update/{id}', 'update')->name('notification.update');
-        Route::delete('/notifications/delete', 'delete')->name('notification.delete');
+        Route::delete('/delete/{id}', 'destroy')->name('notification.delete');
+        Route::delete('/delete-all', 'destroyAll')->name('notification.delete-all');
     });
 
     Route::get('exam-question/{id}',[ExamQuestionController::class,'create'])->name('exam-question.create');

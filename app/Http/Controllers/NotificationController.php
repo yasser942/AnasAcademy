@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Notifications\PushedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends Controller
@@ -26,14 +27,25 @@ class NotificationController extends Controller
             self::markAsRead($id);
             return view('templates.notifications.show', compact('notification'));
      }
-    public function delete(Request $request)
+
+     public  function destroy($id)
+     {
+         $notification = auth()->user()->notifications()->find($id);
+         if ($notification) {
+             $notification->delete();
+         }
+         return redirect()->back()->with('success', 'تم حذف الاشعار بنجاح');
+     }
+    public function destroyAll()
     {
-        $notificationIds = $request->input('notificationIds');
+        $notifications = auth()->user()->notifications()->get();
+        if ($notifications) {
+            foreach ($notifications as $notification) {
+                $notification->delete();
+            }
+        }
+        return redirect()->back()->with('success', 'تم حذف الاشعارات بنجاح');
 
-        // Delete the selected notifications
-        Auth::user()->notifications()->whereIn('id', $notificationIds)->delete();
-
-        return response()->json(['success' => true]);
     }
 
 

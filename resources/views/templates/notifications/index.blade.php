@@ -1,6 +1,7 @@
 @extends('templates.components.index')
 
 @section('content')
+    @include('templates.components.session-messages')
     @php
         \Carbon\Carbon::setLocale('ar');
     @endphp
@@ -9,13 +10,20 @@
     <div class="breadcrumb-header justify-content-between">
 
         <div class="d-flex my-xl-auto right-content">
+            @if(count($notifications)>0)
+            <div class="pr-1 mb-3 mb-xl-0">
+                <form method="POST" action="{{route('notification.delete-all')}}" class="ml-2">
 
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-delete"></i></button>
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-outline-indigo btn-rounded btn-block" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                        <i class="mdi mdi-delete"> حذف جميع الإشعارات</i>
+                    </button>
+                </form>
             </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-pen"></i></button>
-            </div>
+            @endif
+
         </div>
     </div>
     <!-- breadcrumb -->
@@ -67,44 +75,72 @@
 
                                  </div>
 
-                                     <div class="d-flex my-xl-auto right-content">
+                                 <div class="d-flex my-xl-auto right-content">
 
-                                         <div class="pr-1 mb-3 mb-xl-0">
-                                             <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-delete"></i></button>
-                                         </div>
-                                         <div class="pr-1 mb-3 mb-xl-0">
-                                             <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-pen"></i></button>
-                                         </div>
+                                     <div class="pr-1 mb-3 mb-xl-0">
+
+
+                                             <form method="POST" action="{{route('notification.delete',$notification->id)}}" class="ml-2">
+
+                                                 @csrf
+                                                 @method('DELETE')
+
+                                                 <button type="submit" class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                     <i class="mdi mdi-delete"></i>
+                                                 </button>
+                                             </form>
                                      </div>
+
+                                 </div>
 
 
                              </div>
 
                      @else
-                         <a href="{{route('notification.show',$notification->id)}}">
-                             <div class="main-mail-item unread">
-                                 <div class="main-mail-checkbox">
-                                     <label class="ckbox"><input type="checkbox"> <span></span></label>
-                                 </div>
+                         <div class="main-mail-item ">
+                             <a href="{{route('notification.show',$notification->id)}}">
 
                                  <div class="main-img-user"><img alt="" src=" {{\App\Models\User::find($notification->data['sender'])->profile_photo_url}}"></div>
-                                 <div class="main-mail-body">
-                                     <div class="main-mail-from">
-                                         {{\App\Models\User::find($notification->data['sender'])->name}}
-                                     </div>
-                                     <div class="main-mail-subject">
-                                         <strong>{{$notification->data['subject']}}</strong>
-                                         <div>
-                                             <span>{{\Str::limit($notification->data['message'],100)}}</span>
-                                         </div>
-                                     </div>
+                             </a>
 
+                             <div class="main-mail-body">
+                                 <div class="main-mail-from">
+                                     {{\App\Models\User::find($notification->data['sender'])->name}}
                                  </div>
-                                 <div class="main-mail-date">
-                                     {{$notification->created_at->diffForHumans()}}
+
+                                 <div class="main-mail-subject">
+                                     <strong>{{$notification->data['subject']}}</strong>
+                                     <div>
+                                         <span>{{\Str::limit($notification->data['message'],100)}}</span>
+                                     </div>
                                  </div>
+
                              </div>
-                         </a>
+                             <div class="main-mail-date">
+                                 {{$notification->created_at->diffForHumans()}}
+
+                             </div>
+
+                             <div class="d-flex my-xl-auto right-content">
+
+                                 <div class="pr-1 mb-3 mb-xl-0">
+
+
+                                                 <form method="POST" action="{{route('notification.delete',$notification->id)}}" class="ml-2">
+
+                                                     @csrf
+                                                     @method('DELETE')
+
+                                                     <button type="submit" class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                         <i class="mdi mdi-delete"></i>
+                                                     </button>
+                                                 </form>
+                                 </div>
+
+                             </div>
+
+
+                         </div>
 
 
                      @endif

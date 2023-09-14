@@ -96,11 +96,19 @@
 <script src="{{asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
-<!-- Internal Form-validation js -->
-<script src="../../assets/js/form-validation.js"></script>
+
 
 <!--Internal  Datatable js -->
 <script src="{{asset('assets/js/table-data.js')}}"></script>
+
+<!--Internal  Morris js -->
+<script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+<script src="{{asset('assets/plugins/morris.js/morris.min.js')}}"></script>
+
+<!--Internal Chart Morris js -->
+<script src="{{asset('assets/js/chart.morris.js')}}"></script>
+
+
 
 
 <!-- Include this JavaScript after your HTML audio elements -->
