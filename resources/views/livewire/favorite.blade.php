@@ -28,12 +28,12 @@
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <audio controls controlslist="nodownload">
-                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-
-
+                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                            <i class="fa fa-play"></i>
+                                                        </button>
+                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                            <i class="fa fa-pause"></i>
+                                                        </button>
                                                     </li>
 
                                                 </ul>
@@ -68,12 +68,12 @@
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <audio controls controlslist="nodownload">
-                                                            <source src="{{ Storage::url('audio/'.$card->audio) }}" type="audio/mpeg">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-
-
+                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                            <i class="fa fa-play"></i>
+                                                        </button>
+                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                            <i class="fa fa-pause"></i>
+                                                        </button>
                                                     </li>
 
                                                 </ul>

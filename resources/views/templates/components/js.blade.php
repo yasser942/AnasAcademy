@@ -113,29 +113,33 @@
 
 <!-- Include this JavaScript after your HTML audio elements -->
 
-<script>
-    let audioElements = document.querySelectorAll('audio');
-    let currentIndex = 0;
 
-    // Function to play the audio at the given index
-    function playAudio(index) {
-        if (audioElements[index]) {
-            audioElements[index].play();
+<script>
+    let audioElement; // The audio element
+
+    // Function to play the audio using the given button
+    function playAudio(button) {
+        let audioPath = button.dataset.audioPath;
+
+        if (audioElement) {
+            audioElement.pause(); // Pause any existing audio
         }
+
+        audioElement = new Audio(audioPath);
+        audioElement.play();
     }
 
-    // Function to pause the audio at the given index
-    function pauseAudio(index) {
-        if (audioElements[index]) {
-            audioElements[index].pause();
-            audioElements[index].currentTime = 0;
+    // Function to pause the audio
+    function pauseAudio() {
+        if (audioElement) {
+            audioElement.pause();
+            audioElement = null;
         }
     }
 
     // Listen for carousel slide events
     $('#carouselExample2').on('slide.bs.carousel', function (e) {
-        pauseAudio(currentIndex); // Pause the current audio
-        currentIndex = e.to; // Update the current index
+        pauseAudio(); // Pause the audio
     });
 </script>
 
