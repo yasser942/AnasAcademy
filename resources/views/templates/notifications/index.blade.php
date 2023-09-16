@@ -85,7 +85,7 @@
                                                  @csrf
                                                  @method('DELETE')
 
-                                                 <button type="submit" class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                 <button type="submit" class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
                                                      <i class="mdi mdi-delete"></i>
                                                  </button>
                                              </form>
@@ -131,7 +131,7 @@
                                                      @csrf
                                                      @method('DELETE')
 
-                                                     <button type="submit" class="btn btn-danger btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                     <button type="submit" class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
                                                          <i class="mdi mdi-delete"></i>
                                                      </button>
                                                  </form>

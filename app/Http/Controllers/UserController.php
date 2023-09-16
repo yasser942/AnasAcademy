@@ -15,4 +15,19 @@ class UserController extends Controller
 
         return view('templates.users.index' , compact('users','plans'));
     }
+    public function toggleStatus($id, $action)
+    {
+        $user = User::findOrFail($id);
+
+        if ($action === 'activate') {
+            $user->status = 'active';
+        } elseif ($action === 'deactivate') {
+            $user->status = 'passive';
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'تم تغيير حالة المستخدم بنجاح');
+    }
+
 }

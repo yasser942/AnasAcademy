@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <button  type="submit" class="btn btn-success btn-space">إرسال</button>
+            <button  type="submit" class="btn btn-success-gradient btn-space">إرسال</button>
 
         </form>
     </div>

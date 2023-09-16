@@ -33,10 +33,10 @@
                                                     <li class="list-group-item "style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                        <button class="btn btn-primary-gradient play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
                                                             <i class="fa fa-play"></i>
                                                         </button>
-                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                        <button class="btn btn-secondary-gradient pause-btn" onclick="pauseAudio()">
                                                             <i class="fa fa-pause"></i>
                                                         </button>
                                                     </li>
@@ -51,7 +51,7 @@
                                                            <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
                                                                @csrf
                                                                @method('DELETE')
-                                                               <button class="btn btn-danger" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                               <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
                                                                    <i class="fa fa-trash"></i> حذف
                                                                </button>
                                                               </form>
@@ -59,7 +59,7 @@
 
                                                         </div>
                                                         <div class="col-md-4 mb-2">
-                                                            <a class="btn btn-warning" href="{{route('card.edit',$card->id)}}">
+                                                            <a class="btn btn-warning-gradient" href="{{route('card.edit',$card->id)}}">
                                                                 <i class="fa fa-edit"></i> تعديل
                                                             </a>
                                                         </div>
@@ -69,7 +69,7 @@
 
                                                         </div>
                                                         @if ($card->isNew())
-                                                            <div class="badge bg-success text-white m-2 ">جديد</div>
+                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -90,10 +90,10 @@
                                                     <li class="list-group-item" style="text-transform: none;"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                        <button class="btn btn-primary-gradient play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
                                                             <i class="fa fa-play"></i>
                                                         </button>
-                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                        <button class="btn btn-secondary-gradient pause-btn" onclick="pauseAudio()">
                                                             <i class="fa fa-pause"></i>
                                                         </button>
                                                     </li>
@@ -109,7 +109,7 @@
                                                             <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button class="btn btn-danger" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                                <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
                                                                     <i class="fa fa-trash"></i> حذف
                                                                 </button>
                                                             </form>
@@ -117,7 +117,7 @@
 
                                                         </div>
                                                         <div class="col-md-4 mb-2">
-                                                            <a class="btn btn-warning" href="{{route('card.edit',$card->id)}}">
+                                                            <a class="btn btn-warning-gradient" href="{{route('card.edit',$card->id)}}">
                                                                 <i class="fa fa-edit"></i> تعديل
                                                             </a>
                                                         </div>
@@ -125,7 +125,7 @@
                                                             @livewire('favorite-button', ['cardId' => $card->id])
                                                         </div>
                                                         @if ($card->isNew())
-                                                            <div class="badge bg-success text-white m-2 ">جديد</div>
+                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
                                                         @endif</div>
                                                 </div>
 

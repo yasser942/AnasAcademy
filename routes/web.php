@@ -45,23 +45,24 @@ Route::prefix('plan')->controller(PlanController::class)->group(function () {
     Route::put('/update/{id}', 'update')->name('plan.update');
     Route::delete('/delete/{id}', 'destroy')->name('plan.delete');
 });
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'checkplan'
+    'checkUserStatus',
+    'checkplan',
+
 
 ])->group(function () {
+
+
     Route::get('/dashboard', [AdminDashboardController::class ,'index'])->name('dashboard');
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'index')->name('user.index');
-        Route::get('/create', 'create')->name('user.create');
-        Route::get('/show/{id}', 'show')->name('user.show');
-        Route::post('/store', 'store')->name('user.store');
-        Route::get('/edit/{id}', 'edit')->name('user.edit');
-        Route::put('/update/{id}', 'update')->name('user.update');
         Route::delete('/delete/{id}', 'destroy')->name('user.delete');
+        Route::get('user/toggleStatus/{id}/{action}', 'toggleStatus')->name('user.toggleStatus');
     });
 
 

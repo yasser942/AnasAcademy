@@ -24,7 +24,7 @@
 
             <div class="col-xl-4 col-lg-4 col-md-12">
                 <div class="card">
-                    <img class="card-img-top w-100" src="{{asset('assets/img/media/login.png')}}" alt="">
+                    <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
                     <div class="card-body">
                        <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
                         <p class="card-text">{{$curriculum->description}}</p>
@@ -32,10 +32,10 @@
                             <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
                                @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-icon"><i class="typcn typcn-trash"></i></button>
+                                <button class="btn btn-danger-gradient btn-icon"><i class="typcn typcn-trash"></i></button>
                             </form>
 
-                            <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info btn-icon"><i class="typcn typcn-edit"></i></a>
+                            <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
                            @if($curriculum->status=='active')
                                 <span class="badge badge-pill badge-success mr-2">مفعل</span>
                             @else

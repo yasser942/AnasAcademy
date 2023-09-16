@@ -84,12 +84,24 @@
                                                         @csrf
                                                         @method('DELETE')
 
-                                                        <button  class="btn btn-danger btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
                                                     </form>
+                                                    <div class="dropdown ml-2">
+                                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-warning-gradient"
+                                                                data-toggle="dropdown" type="button">الحالة<i class="fas fa-caret-down ml-1"></i></button>
+                                                        <div class="dropdown-menu tx-13">
+                                                            @if($user->status === 'active')
+                                                                <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'deactivate']) }}">تعطيل</a>
+                                                            @else
+                                                                <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'activate']) }}">تفعيل</a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
 
 
                                                     <div class="dropdown">
-                                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info"
+                                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info-gradient"
                                                                 data-toggle="dropdown" type="button">الخطط<i class="fas fa-caret-down ml-1"></i></button>
                                                         <div class="dropdown-menu tx-13">
                                                             @foreach($plans as $plan)

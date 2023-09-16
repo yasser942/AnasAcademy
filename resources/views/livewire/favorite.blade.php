@@ -28,10 +28,10 @@
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                        <button class="btn btn-primary-gradient play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
                                                             <i class="fa fa-play"></i>
                                                         </button>
-                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                        <button class="btn btn-secondary-gradient pause-btn" onclick="pauseAudio()">
                                                             <i class="fa fa-pause"></i>
                                                         </button>
                                                     </li>
@@ -44,7 +44,7 @@
                                                     <div class="row ">
 
                                                         <div class="col-md-4 mx-auto">
-                                                            <button wire:click="deleteFavorite({{$card->id}})" class="btn btn-primary">
+                                                            <button wire:click="deleteFavorite({{$card->id}})" class="btn btn-primary-gradient">
                                                                 إزالة من المفضلة
                                                             </button>
 
@@ -68,10 +68,10 @@
                                                     <li class="list-group-item"> {{$card->sentence}}</li>
                                                     <li class="list-group-item"> {{$card->sentence_translation}}</li>
                                                     <li class="list-group-item">
-                                                        <button class="btn btn-primary play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
+                                                        <button class="btn btn-primary-gradient play-btn" data-audio-path="{{ Storage::url('audio/' . $card->audio) }}" onclick="playAudio(this)">
                                                             <i class="fa fa-play"></i>
                                                         </button>
-                                                        <button class="btn btn-secondary pause-btn" onclick="pauseAudio()">
+                                                        <button class="btn btn-secondary-gradient pause-btn" onclick="pauseAudio()">
                                                             <i class="fa fa-pause"></i>
                                                         </button>
                                                     </li>
@@ -85,7 +85,7 @@
 
                                                         <div class="col-md-4 mx-auto">
 
-                                                            <button wire:click="deleteFavorite({{$card->id}})" class="btn btn-primary">
+                                                            <button wire:click="deleteFavorite({{$card->id}})" class="btn btn-primary-gradient">
                                                                 إزالة من المفضلة
                                                             </button>
 

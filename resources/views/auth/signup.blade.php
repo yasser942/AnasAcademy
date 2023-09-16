@@ -32,9 +32,8 @@
 								<div class="row">
 									<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
 										<div class="card-sigin">
-											<div class="mb-5 d-flex"> <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 mr-1 mr-0 my-auto tx-28">Va<span>le</span>x</h1></div>
 											<div class="main-signup-header">
-												<h2 class="text-primary">أهلا بك !</h2>
+                                                <h2 class="text-primary">أهلا بكم في أكاديمية أنس</h2>
 												<h5 class="font-weight-normal mb-4">إنشاء حساب مجاني لا يستغرق دقيقة .</h5>
                                                 <form method="POST" action="{{ route('register') }}" >
                                                     @csrf
@@ -50,7 +49,7 @@
 
                                                     <div class="form-group">
                                                         <label>تأكيد كلمة المرور</label> <input class="form-control" placeholder="أعد كتابة كلمة المرور" type="password" name="password_confirmation" required>
-                                                    </div><button type="submit" class="btn btn-main-primary btn-block">إنشاء حساب</button>
+                                                    </div><button type="submit" class="btn btn-primary-gradient btn-block">إنشاء حساب</button>
 
 												</form>
 												<div class="main-signup-footer mt-5">

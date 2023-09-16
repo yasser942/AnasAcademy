@@ -1,4 +1,5 @@
 @include('templates.components.head')
+@include('templates.components.session-messages')
 	<body class="main-body bg-light">
 
 		<!-- Loader -->
@@ -26,11 +27,9 @@
 							<div class="container p-0">
 								<div class="row">
 									<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-										<div class="card-sigin">
-											<div class="mb-5 d-flex"> <a href="index.html"><img src="{{asset('assets/img/media/login.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 mr-1 mr-0 my-auto tx-28">أكاديمية أنس</h1></div>
 											<div class="card-sigin">
 												<div class="main-signup-header">
-													<h2>أهلا بكم</h2>
+													<h2 class="text-primary">أهلا بكم في أكاديمية أنس</h2>
 													<h5 class="font-weight-semibold mb-4">الرجاء إدخال الإيميل وكلمة المرور</h5>
                                                     <form method="POST" action="{{ route('login') }}">
                                                         @csrf
@@ -46,7 +45,7 @@
                                                             @error('password')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-														</div><button class="btn btn-main-primary btn-block">تسجيل الدخول</button>
+														</div><button class="btn btn-primary-gradient btn-block">تسجيل الدخول</button>
 
 													</form>
 													<div class="main-signin-footer mt-5">
@@ -55,7 +54,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+
 									</div>
 								</div>
 							</div><!-- End -->
