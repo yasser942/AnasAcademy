@@ -29,5 +29,12 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'تم تغيير حالة المستخدم بنجاح');
     }
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'تم حذف المستخدم بنجاح');
+    }
 
 }

@@ -22,10 +22,9 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between">
-                                <h4 class="card-title mg-b-0">USERS TABLE</h4>
+                                <h4 class="card-title mg-b-0">قائمة الدروس</h4>
                                 <i class="mdi mdi-dots-horizontal text-gray"></i>
                             </div>
-                            <p class="tx-12 tx-gray-500 mb-2">Example of Valex Simple Table. <a href="">Learn more</a></p>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive border-top userlist-table">
@@ -40,7 +39,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($unit->lessons as $lesson)
+                                    @foreach($lessons as $lesson)
                                         <tr>
 
                                             <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a></td>
@@ -78,20 +77,36 @@
 
                                     </tbody>
                                 </table>
+                                <nav class="mt-4" aria-label="Page navigation example">
+                                    <ul class="pagination round-pagination">
+
+                                        <!-- Previous Page Link -->
+                                        @if ($lessons->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link"> < </span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link" href="{{ $lessons->previousPageUrl() }}">< </a></li>
+                                        @endif
+
+                                        <!-- Pagination Links -->
+                                        @foreach ($lessons->getUrlRange(1, $lessons->lastPage()) as $page => $url)
+                                            @if ($page == $lessons->currentPage())
+                                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Next Page Link -->
+                                        @if ($lessons->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $lessons->nextPageUrl() }}"> > </a></li>
+                                        @else
+                                            <li class="page-item disabled"><span class="page-link"> > </span></li>
+                                        @endif
+
+                                    </ul>
+                                </nav>
+
                             </div>
-                            <ul class="pagination mt-4 mb-0 float-left">
-                                <li class="page-item page-prev disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Prev</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item page-next">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
 

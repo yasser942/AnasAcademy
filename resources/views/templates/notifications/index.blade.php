@@ -41,10 +41,7 @@
                      <p>{{count(auth()->user()->unreadNotifications)}} إشعار غير مقروء</p>
                  </div>
                  <div>
-                     <span>1-50 of 1200</span>
-                     <div class="btn-group" role="group">
-                         <button class="btn btn-outline-secondary disabled" type="button"><i class="icon ion-ios-arrow-forward"></i></button> <button class="btn btn-outline-secondary" type="button"><i class="icon ion-ios-arrow-back"></i></button>
-                     </div>
+
                  </div>
              </div><!-- main-mail-list-header -->
              <!-- main-mail-options -->
@@ -97,7 +94,7 @@
                              </div>
 
                      @else
-                         <div class="main-mail-item ">
+                         <div class="main-mail-item unread ">
                              <a href="{{route('notification.show',$notification->id)}}">
 
                                  <div class="main-img-user"><img alt="" src=" {{\App\Models\User::find($notification->data['sender'])->profile_photo_url}}"></div>
@@ -153,5 +150,33 @@
      </div>
 
  @endif
+    <nav class="mt-4" aria-label="Page navigation example">
+        <ul class="pagination round-pagination">
+
+            <!-- Previous Page Link -->
+            @if ($notifications->onFirstPage())
+                <li class="page-item disabled"><span class="page-link"> < </span></li>
+            @else
+                <li class="page-item"><a class="page-link" href="{{ $notifications->previousPageUrl() }}"> < </a></li>
+            @endif
+
+            <!-- Pagination Links -->
+            @foreach ($notifications->getUrlRange(1, $notifications->lastPage()) as $page => $url)
+                @if ($page == $notifications->currentPage())
+                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                @else
+                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                @endif
+            @endforeach
+
+            <!-- Next Page Link -->
+            @if ($notifications->hasMorePages())
+                <li class="page-item"><a class="page-link" href="{{ $notifications->nextPageUrl() }}"> > </a></li>
+            @else
+                <li class="page-item disabled"><span class="page-link"> > </span></li>
+            @endif
+
+        </ul>
+    </nav>
 
 @endsection

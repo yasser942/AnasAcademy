@@ -79,7 +79,7 @@ class NotificationController extends Controller
 
 
 
-        return redirect()->back()->with('success', 'تم ارسال الاشعار بنجاح');
+        return redirect()->route('notification.index')->with('success', 'تم ارسال الاشعار بنجاح');
     }
 
 }

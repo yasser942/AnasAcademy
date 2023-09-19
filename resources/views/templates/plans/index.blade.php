@@ -14,22 +14,21 @@
                     <div class="panel-body text-center">
                         <p class="lead"><strong>{{$plan->price}} $</strong>  </p>
                     </div>
+
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item"><strong>{{$plan->description}} <br></strong></li>
-                        <li class="list-group-item"><strong>{{$plan->description}} <br></strong></li>
-                        <li class="list-group-item"><strong>{{$plan->description}} <br></strong></li>
-                        <li class="list-group-item"><strong>{{$plan->description}} <br></strong></li>
+
 
                     </ul>
                     <div class="panel-footer text-center">
-                        <a class="btn btn-warning" href="{{ route('plan.edit', $plan->id) }}">
+                        <a class="btn btn-warning-gradient" href="{{ route('plan.edit', $plan->id) }}">
                             <i class="fa fa-edit"></i> تعديل
                         </a>
 
                         <form method="POST" action="{{ route('plan.delete', $plan->id) }}" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger" onclick="return confirmDelete(this.form, 'هل أنت متأكد من عملية الحذف ؟')">
+                            <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form, 'هل أنت متأكد من عملية الحذف ؟')">
                                 <i class="fa fa-trash"></i> حذف
                             </button>
                         </form>

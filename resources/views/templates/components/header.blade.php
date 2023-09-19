@@ -162,7 +162,7 @@
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>@if(count(auth()->user()->unreadNotifications)>0)<span class=" pulse"></span> @endif</a>
                     <div class="dropdown-menu">
-                        <div class="menu-header-content bg-primary text-right">
+                        <div class="menu-header-content bg-primary-gradient text-right">
                             <div class="d-flex">
                                 <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الإشعارات</h6>
                             </div>
@@ -197,7 +197,7 @@
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href=""><img alt="" src="{{auth()->user()->profile_photo_url}}"></a>
                     <div class="dropdown-menu">
-                        <div class="main-header-profile bg-primary p-3">
+                        <div class="main-header-profile bg-primary-gradient p-3">
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt="" src="{{auth()->user()->profile_photo_url}}" class=""></div>
                                 <div class="mr-3 my-auto">

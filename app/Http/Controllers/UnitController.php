@@ -52,10 +52,12 @@ class UnitController extends Controller
      */
     public function show(string $id)
     {
-        $unit =Unit::with('lessons')->findOrFail($id);
+        $unit = Unit::findOrFail($id);
+        $lessons = $unit->lessons()->paginate(2); // You can specify the number of items per page
 
-        return view('templates/units/show',compact('unit'));
+        return view('templates/units/show', compact('unit', 'lessons'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -21,10 +21,9 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between">
-                                <h4 class="card-title mg-b-0">USERS TABLE</h4>
+                                <h4 class="card-title mg-b-0">قائمة المستخدمين</h4>
                                 <i class="mdi mdi-dots-horizontal text-gray"></i>
                             </div>
-                            <p class="tx-12 tx-gray-500 mb-2">Example of Valex Simple Table. <a href="">Learn more</a></p>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive border-top userlist-table">
@@ -118,20 +117,36 @@
 
                                     </tbody>
                                 </table>
+                                <nav class="mt-4" aria-label="Page navigation example">
+                                    <ul class="pagination round-pagination">
+
+                                        <!-- Previous Page Link -->
+                                        @if ($users->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link"> < </span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}"> < </a></li>
+                                        @endif
+
+                                        <!-- Pagination Links -->
+                                        @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
+                                            @if ($page == $users->currentPage())
+                                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Next Page Link -->
+                                        @if ($users->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}"> > </a></li>
+                                        @else
+                                            <li class="page-item disabled"><span class="page-link"> > </span></li>
+                                        @endif
+
+                                    </ul>
+                                </nav>
+
                             </div>
-                            <ul class="pagination mt-4 mb-0 float-left">
-                                <li class="page-item page-prev disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Prev</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item page-next">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
 
