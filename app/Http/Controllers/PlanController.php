@@ -21,7 +21,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('templates.plans.create');
     }
 
     /**
@@ -29,7 +29,14 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->validate([
+            'name'=>'required|unique:plans|string',
+            'price'=>'required|numeric',
+            'description'=>'required|string',
+            'duration_in_days'=>'required|numeric',
+        ]);
+        Plan::create($data);
+        return redirect()->route('plan.index')->with('success','تم اضافة الخطة بنجاح');
     }
 
     /**
@@ -45,7 +52,8 @@ class PlanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $plan = Plan::findOrFail($id);
+        return view('templates.plans.edit', compact('plan'));
     }
 
     /**
@@ -53,7 +61,15 @@ class PlanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data=$request->validate([
+            'name'=>'required|string|unique:plans,name,'.$id,
+            'price'=>'required|numeric',
+            'description'=>'required|string',
+            'duration_in_days'=>'required|numeric',
+        ]);
+        $plan = Plan::findOrFail($id);
+        $plan->update($data);
+        return redirect()->route('plan.index')->with('success','تم تعديل الخطة بنجاح');
     }
 
     /**
@@ -61,6 +77,12 @@ class PlanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $plan = Plan::findOrFail($id);
+            $plan->delete();
+            return redirect()->route('plan.index')->with('success','تم حذف الخطة بنجاح');
+        } catch (\Throwable $th) {
+            return redirect()->route('plan.index')->with('error','حدث خطأ ما');
+        }
     }
 }

@@ -69,11 +69,10 @@
                                                     <form method="POST" action="{{route('exam.delete',$exam->id)}}" class="ml-2">
                                                         @csrf
                                                         @method('DELETE')
-
-                                                        <button  class="btn btn-danger btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
                                                     </form>
 
-                                                    <a href="{{route('exam.edit',$exam->id)}}" class="btn btn-info btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                    <a href="{{route('exam.edit',$exam->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
                                                    </div>
 
                                             </td>

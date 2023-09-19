@@ -64,15 +64,31 @@ class PdfController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pdf=PDF::findOrFail($id);
+        return view('templates/resources/pdfs/edit',compact('pdf'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreatePdfRequest $request, string $id)
     {
-        //
+        $data=$request->validated();
+        $pdf=PDF::findOrFail($id);
+        $pdf->name = $data['name'];
+        $pdf->description = $data['description'];
+        $pdf->status = $data['status'];
+        $pdf->link = $data['link'];
+        $pdf->type = $data['type'];
+        $pdf->lesson_id = $data['lesson_id'];
+
+        $pdf->save();
+        if ($pdf){
+            return redirect()->route('lesson.show',[$pdf->lesson_id])->with('success','تم تعديل المصدر بنجاح');
+        }
+
+
+
     }
 
     /**

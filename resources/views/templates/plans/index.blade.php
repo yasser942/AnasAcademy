@@ -1,8 +1,9 @@
 @extends('templates.components.index')
 @section('content')
 
-    <h4 class="card-title m-40">الخطط المتوفرة</h4>
-    <!-- row -->
+    <div class="row row-xs wd-xl-80p mb-4">
+        <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('plan.create')}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء خطة جديدة</a></div>
+    </div>    <!-- row -->
     <div class="row">
         @foreach($plans as $plan)
             <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-3">
@@ -21,8 +22,19 @@
 
                     </ul>
                     <div class="panel-footer text-center">
-                        <a class="btn btn-danger" href="https://wa.me/+905538762316/?text=مرحبا أريد الاشتراك بالمنصة">تواصل معنا للاشتراك</a>
+                        <a class="btn btn-warning" href="{{ route('plan.edit', $plan->id) }}">
+                            <i class="fa fa-edit"></i> تعديل
+                        </a>
+
+                        <form method="POST" action="{{ route('plan.delete', $plan->id) }}" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" onclick="return confirmDelete(this.form, 'هل أنت متأكد من عملية الحذف ؟')">
+                                <i class="fa fa-trash"></i> حذف
+                            </button>
+                        </form>
                     </div>
+
                 </div>
             </div><!-- COL-END -->
 
