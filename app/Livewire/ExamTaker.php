@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\Exam;
 use App\Models\ExamQuestion;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ExamTaker extends Component
 {
+    use WithPagination;
     public $exam;
     public $questions = [];
     public $userAnswers = [];

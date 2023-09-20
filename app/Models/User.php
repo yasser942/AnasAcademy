@@ -90,15 +90,34 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $now = Carbon::now();
 
-        // Calculate the end date based on the membership's duration
-        $endDate = $now->copy()->addDays($plan->duration_in_days);
+        // Check if the user has a current plan
+        $currentPlan = $this->currentPlan();
 
-        // Attach the membership to the user with start and end dates
-        $this->memberships()->attach($plan->id, [
+        // Detach expired plans
+        $this->detachExpiredPlans($now);
+
+        if ($currentPlan) {
+            // Detach the current plan
+            $this->plans()->detach($currentPlan->id);
+        }
+
+        // Attach the new plan with its original duration
+        $endDate = $now->copy()->addDays($plan->duration_in_days);
+        $this->plans()->attach($plan->id, [
             'start_date' => $now,
             'end_date' => $endDate,
         ]);
     }
+
+    private function detachExpiredPlans($now)
+    {
+        // Detach plans that have already expired
+        $expiredPlans = $this->plans()->where('end_date', '<', $now)->get();
+        foreach ($expiredPlans as $expiredPlan) {
+            $this->plans()->detach($expiredPlan->id);
+        }
+    }
+
     public function assignTrialPlanToNewUser(User $user)
     {
         // Retrieve the "تجريبي" plan
@@ -157,6 +176,21 @@ public  function isPlanExpired()
 
             // Calculate the difference in days between the end date and the current date
             return $now->diffInDays($endDate);
+        }
+
+        // If there's no current plan, return 0 or any other appropriate value
+        return 0;
+    }
+    public function remainingTime (){
+        $currentPlan = $this->currentPlan();
+
+        if ($currentPlan) {
+
+            $now = Carbon::now();
+            $endDate = Carbon::parse($currentPlan->pivot->end_date);
+
+            // Calculate the difference in days between the end date and the current date
+            return $now->diffAsCarbonInterval($endDate);
         }
 
         // If there's no current plan, return 0 or any other appropriate value

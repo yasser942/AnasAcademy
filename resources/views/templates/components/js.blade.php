@@ -147,14 +147,6 @@
 
 
 
-
-
-
-
-
-
-
-
     <script>
     function confirmDelete(form ,msg) {
         if (confirm(msg)) {
@@ -164,4 +156,5 @@
         }
     }
 </script>
+
 

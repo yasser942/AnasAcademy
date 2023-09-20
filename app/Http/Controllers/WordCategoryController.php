@@ -13,7 +13,7 @@ class WordCategoryController extends Controller
      */
     public function index()
     {
-        $wordCategories = WordCategory::latest()->get();
+        $wordCategories = WordCategory::latest()->paginate(10);
         return view('templates.word-category.index', compact('wordCategories'));
     }
 

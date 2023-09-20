@@ -23,7 +23,7 @@
                                         <div class="carousel-item active">
                                             <div class="panel price panel-color">
 
-                                                <div class="panel-heading bg-primary p-0 text-center" style="text-transform: none;">
+                                                <div class="panel-heading bg-primary-gradient p-0 text-center" style="text-transform: none;">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
                                                 <div class="panel-body text-center">
@@ -80,7 +80,7 @@
                                         <div class="carousel-item">
                                             <div class="panel price panel-color">
 
-                                                <div class="panel-heading bg-primary p-0 text-center" style="text-transform: none;">
+                                                <div class="panel-heading bg-primary-gradient p-0 text-center" style="text-transform: none;">
                                                     <h3>{{$card->word}}</h3>
                                                 </div>
                                                 <div class="panel-body text-center">

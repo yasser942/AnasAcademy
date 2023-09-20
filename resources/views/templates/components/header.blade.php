@@ -22,48 +22,7 @@
         </div>
         <div class="main-header-right">
             <ul class="nav">
-                <li class="">
-                    <div class="dropdown  nav-itemd-none d-md-flex">
-                        <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
-                            <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img src="../../assets/img/flags/us_flag.jpg" alt="img"></span>
-                            <div class="my-auto">
-                                <strong class="mr-2 ml-2 my-auto">English</strong>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-                            <a href="#" class="dropdown-item d-flex ">
-                                <span class="avatar  ml-3 align-self-center bg-transparent"><img src="../../assets/img/flags/french_flag.jpg" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">French</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar  ml-3 align-self-center bg-transparent"><img src="../../assets/img/flags/germany_flag.jpg" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Germany</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar ml-3 align-self-center bg-transparent"><img src="../../assets/img/flags/italy_flag.jpg" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Italy</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar ml-3 align-self-center bg-transparent"><img src="../../assets/img/flags/russia_flag.jpg" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Russia</span>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar  ml-3 align-self-center bg-transparent"><img src="../../assets/img/flags/spain_flag.jpg" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">spain</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
+
             </ul>
             <div class="nav nav-item  navbar-nav-right ml-auto">
                 <div class="nav-link" id="bs-example-navbar-collapse-1">
@@ -84,7 +43,7 @@
                 <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class=" pulse-danger"></span></a>
                     <div class="dropdown-menu">
-                        <div class="menu-header-content bg-primary text-right">
+                        <div class="menu-header-content bg-primary-gradient text-right">
                             <div class="d-flex">
                                 <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">Messages</h6>
                                 <span class="badge badge-pill badge-warning mr-auto my-auto float-left">Mark All Read</span>

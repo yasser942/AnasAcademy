@@ -13,7 +13,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::all();
+        $exams = Exam::paginate(10);
         return view('templates.exams.index', compact('exams'));
     }
 

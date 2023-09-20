@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
@@ -84,5 +85,15 @@ class PlanController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('plan.index')->with('error','حدث خطأ ما');
         }
+    }
+
+    public function assignPlan( string $planId,string $userId)
+    {
+        $plan = Plan::findOrFail($planId);
+        $user = User::findOrFail($userId);
+        $user->assignPlan($plan);
+        return redirect()->route('user.index')->with('success','تم تعيين الخطة بنجاح');
+
+
     }
 }

@@ -71,7 +71,7 @@
                                                 @endif
 
                                             </td>
-                                            <td>{{$user->daysLeftInCurrentPlan()}}</td>
+                                            <td>{{$user->remainingTime()}}</td>
                                             <td>{{$user-> email}}</td>
                                             <td>
                                                 {{$user->created_at->diffForHumans() }}
@@ -104,7 +104,11 @@
                                                                 data-toggle="dropdown" type="button">الخطط<i class="fas fa-caret-down ml-1"></i></button>
                                                         <div class="dropdown-menu tx-13">
                                                             @foreach($plans as $plan)
-                                                                <a class="dropdown-item" href="#">{{$plan->name}}</a>
+                                                                <form method="POST" action="{{route('plan.assign-plan',['planId' => $plan->id,'userId' => $user->id])}}" >
+                                                                    @csrf
+
+                                                                    <button class="dropdown-item" onclick="return confirmDelete(this.form,'هل أنت متأكد من ذلك  ؟')" >{{$plan->name}}</button>
+                                                                </form>
 
                                                             @endforeach
                                                         </div>

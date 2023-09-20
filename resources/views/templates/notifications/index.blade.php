@@ -122,7 +122,6 @@
 
                                  <div class="pr-1 mb-3 mb-xl-0">
 
-
                                                  <form method="POST" action="{{route('notification.delete',$notification->id)}}" class="ml-2">
 
                                                      @csrf

@@ -38,12 +38,7 @@ Route::get('/', function () {
 });
 Route::prefix('plan')->controller(PlanController::class)->group(function () {
     Route::get('/', 'index')->name('plan.index');
-    Route::get('/create', 'create')->name('plan.create');
-    Route::get('/show/{id}', 'show')->name('plan.show');
-    Route::post('/store', 'store')->name('plan.store');
-    Route::get('/edit/{id}', 'edit')->name('plan.edit');
-    Route::put('/update/{id}', 'update')->name('plan.update');
-    Route::delete('/delete/{id}', 'destroy')->name('plan.delete');
+
 });
 
 Route::middleware([
@@ -63,6 +58,16 @@ Route::middleware([
         Route::get('/', 'index')->name('user.index');
         Route::delete('/delete/{id}', 'destroy')->name('user.delete');
         Route::get('user/toggleStatus/{id}/{action}', 'toggleStatus')->name('user.toggleStatus');
+    });
+
+    Route::prefix('plan')->controller(PlanController::class)->group(function () {
+        Route::get('/create', 'create')->name('plan.create');
+        Route::get('/show/{id}', 'show')->name('plan.show');
+        Route::post('/store', 'store')->name('plan.store');
+        Route::get('/edit/{id}', 'edit')->name('plan.edit');
+        Route::put('/update/{id}', 'update')->name('plan.update');
+        Route::delete('/delete/{id}', 'destroy')->name('plan.delete');
+        Route::post('assign-plan/{planId}/{userId}', 'assignPlan')->name('plan.assign-plan');
     });
 
 
