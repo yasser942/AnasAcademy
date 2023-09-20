@@ -149,7 +149,7 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('end_date', '>=', $now)
             ->first();
     }
-public  function isPlanExpired()
+public  function isPlanExpired() : bool
 {
     // Check if the user has any plans
     if (!$this->plans->isEmpty()) {
