@@ -18,7 +18,7 @@
                 <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-3">
                     <div class="panel price panel-color">
                         <div class="panel-heading bg-warning-gradient p-0 text-center">
-                            <h3>{{$plan->name}}</h3>
+                            <h3>{{$plan->name}} (الخطة الحالية)</h3>
                         </div>
                         <div class="panel-body text-center">
                             <p class="lead"><strong>{{$plan->price}} $</strong>  </p>

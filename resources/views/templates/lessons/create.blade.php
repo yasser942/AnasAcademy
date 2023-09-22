@@ -36,7 +36,7 @@
                  </div>
              </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الدرس</button>
+            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الدرس</button>
 
         </form>
     </div>

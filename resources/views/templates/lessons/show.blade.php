@@ -11,11 +11,13 @@
                 <a href="{{route('pdf.create',$lesson->id)}}" class="dropdown-item">PDF</a>
                 <a href="{{route('test.create',$lesson->id)}}" class="dropdown-item">إختبار</a>
                 <a href="{{route('video.create',$lesson->id)}}" class="dropdown-item">فيديو</a>
+                <a href="{{route('practical-test.create',$lesson->id)}}" class="dropdown-item">إختبار تفاعلي </a>
+
             </div><!-- dropdown-menu --></div>
     </div>
 
     <div class="row mt-4">
-        @if(count($lesson->pdfs)==0 && count($lesson->tests)==0 )
+        @if(empty($lesson->pdfs) && empty($lesson->tests) && empty($practicalTests))
             <div class="card-body text-center">
                 <img src="{{asset('assets/img/svgicons/note_taking.svg')}}" alt="" class="wd-35p">
                 <h5 class="mg-b-10 mg-t-15 tx-18">لا يوجد شيء لعرضه</h5>
@@ -135,6 +137,45 @@
                         </div>
                     </div>
                 @endforeach
+            @foreach($lesson->practicalTests as $practicalTest)
+                    <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                        <div class="card card-danger">
+                            <div class="card-header pb-0">
+                                <a href="{{route('practical-test.show',$practicalTest->id)}}"><h5 class="card-title mb-0 pb-0">{{$practicalTest->name}}</h5></a>
+                            </div>
+                            <div class="card-body text-danger">
+                                {{$practicalTest->description}}
+                            </div>
+                            <div class="card-footer d-flex align-items-center">
+                                <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                        <i class="typcn typcn-trash"></i>
+                                    </button>
+                                </form>
+
+                                <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                    <i class="typcn typcn-edit"></i>
+                                </a>
+
+                                @if($practicalTest->status=='active')
+                                    <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                @else
+                                    <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                @endif
+
+                                <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                <span class="badge badge-pill badge-primary-transparent mr-2">إختبار تفاعلي</span>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
         @endif
     </div>
 

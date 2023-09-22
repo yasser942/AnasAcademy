@@ -21,4 +21,5 @@ class Lesson extends Model
     public function pdfs()  { return $this->hasMany(PDF::class); }
     public function tests() { return $this->hasMany(Test::class); }
     public function videos(){ return $this->hasMany(Video::class); }
+    public function practicalTests(){ return $this->hasMany(PracticalTest::class); }
 }

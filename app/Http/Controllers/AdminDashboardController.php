@@ -17,10 +17,12 @@ class AdminDashboardController extends Controller
         $curriculums = Curriculum::all();
         $levels = Level::all();
         $units = Unit::all();
+        $user = User::findOrFail(auth()->user()->id);
+        $remainingTime = $user->remainingTime();
 
 
         return view('templates/main', compact( 'users',
-            'curriculums', 'levels',
+            'curriculums', 'levels','remainingTime',
             'units'));
     }
 

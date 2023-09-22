@@ -64,6 +64,18 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Add this inside the <head> section of your HTML -->
+    <script>
+        function showLoader() {
+            // Show the loader
+            document.getElementById('global-loader').style.display = 'block';
+        }
+
+        function hideLoader() {
+            // Hide the loader
+            document.getElementById('global-loader').style.display = 'none';
+        }
+    </script>
 
 
 

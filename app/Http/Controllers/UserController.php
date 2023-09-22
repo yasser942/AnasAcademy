@@ -8,12 +8,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('roles','plans')->paginate(10);
+        $usersQuery = User::with('roles', 'plans');
+
+        // Check if there is a search term (email)
+        if ($request->has('email')) {
+            $email = $request->input('email');
+            $usersQuery->where('email', 'like', '%' . $email . '%');
+        }
+
+        $users = $usersQuery->paginate(10);
         $plans = Plan::all();
 
-        return view('templates.users.index' , compact('users','plans'));
+        return view('templates.users.index', compact('users', 'plans'));
     }
     public function toggleStatus($id, $action)
     {

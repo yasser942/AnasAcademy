@@ -4,10 +4,10 @@
 @section('content')
     @include('templates.components.validation-messages')
     <div class="card-body pt-0">
-        <form  method="POST" action="{{route('video.store')}}">
+        <form  method="POST" action="{{route('practical-test.store')}}">
             @csrf
                 <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
-            <input type="hidden" name="type" value="pdf">
+            <input type="hidden" name="type" value="practical_test">
 
             <div class="form-group">
                     <label for="exampleInputEmail1">الاسم</label>
@@ -33,15 +33,9 @@
 
                     </select>
                 </div>
-             <div class="form-group">
-                 <div >
-                     <label for="Textarea">الرجاء إدراج صورة</label>
 
-                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200"  />
-                 </div>
-             </div>
 
-            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">إنشاء المصدر</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-0">إنشاء المصدر</button>
 
         </form>
     </div>

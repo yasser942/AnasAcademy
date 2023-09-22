@@ -10,6 +10,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PracticalTestController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
@@ -37,7 +38,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix('plan')->controller(PlanController::class)->group(function () {
-    Route::get('/', 'index')->name('plan.index');
+    Route::get('/', 'index')->name('plan.index')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+        'checkUserStatus',
+    ]);
 
 });
 
@@ -178,6 +184,16 @@ Route::middleware([
         Route::put('/update/{id}', 'update')->name('notification.update');
         Route::delete('/delete/{id}', 'destroy')->name('notification.delete');
         Route::delete('/delete-all', 'destroyAll')->name('notification.delete-all');
+    });
+
+    Route::prefix('practical-test')->controller(PracticalTestController::class)->group(function () {
+        Route::get('/', 'index')->name('practical-test.index');
+        Route::get('/create/{id}', 'create')->name('practical-test.create');
+        Route::get('/show/{id}', 'show')->name('practical-test.show');
+        Route::post('/store', 'store')->name('practical-test.store');
+        Route::get('/edit/{id}', 'edit')->name('practical-test.edit');
+        Route::put('/update/{id}', 'update')->name('practical-test.update');
+        Route::delete('/delete/{id}', 'destroy')->name('practical-test.delete');
     });
 
     Route::get('exam-question/{id}',[ExamQuestionController::class,'create'])->name('exam-question.create');

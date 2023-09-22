@@ -23,7 +23,7 @@
                     <textarea class="form-control" placeholder="وصف الخطة" rows="3" name="description"></textarea>
                 </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الخطة</button>
+            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الخطة</button>
 
         </form>
     </div>

@@ -20,35 +20,73 @@
 
     <!-- row opened -->
     <div class="row row-sm mt-4">
-       @foreach($curriculums as $curriculum)
+        @if(count($curriculums)==0)
+            <div class="card-body text-center">
+                <img src="{{asset('assets/img/svgicons/note_taking.svg')}}" alt="" class="wd-35p">
+                <h5 class="mg-b-10 mg-t-15 tx-18">لا يوجد شيء لعرضه</h5>
+            </div>
+        @else
 
-            <div class="col-xl-4 col-lg-4 col-md-12">
-                <div class="card">
-                    <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
-                    <div class="card-body">
-                       <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
-                        <p class="card-text">{{$curriculum->description}}</p>
-                        <div class="btn-icon-list">
-                            <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
-                               @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger-gradient btn-icon"><i class="typcn typcn-trash"></i></button>
-                            </form>
+            @foreach($curriculums as $curriculum)
+                @if($curriculum->status =='active')
+                    <div class="col-xl-4 col-lg-4 col-md-12">
+                        <div class="card">
+                            <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
+                            <div class="card-body">
+                                <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
+                                <p class="card-text">{{$curriculum->description}}</p>
+                                <div class="btn-icon-list">
+                                    <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من ذلك  ؟')" ><i class="typcn typcn-trash"></i></button>
+                                    </form>
 
-                            <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
-                           @if($curriculum->status=='active')
-                                <span class="badge badge-pill badge-success mr-2">مفعل</span>
-                            @else
-                                <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                    <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                    @if($curriculum->status=='active')
+                                        <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
 
-                            @endif
-                            <span class="badge badge-pill badge-primary-transparent mr-2">عدد المستويات {{count($curriculum->levels)}}  </span>
+                                    @endif
+                                    <span class="badge badge-pill badge-primary-transparent mr-2">عدد المستويات {{count($curriculum->levels)}}  </span>
 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-       @endforeach
+                @else
+                    @if(auth()->user()->hasRole('أدمن'))
+                        <div class="col-xl-4 col-lg-4 col-md-12">
+                            <div class="card">
+                                <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
+                                <div class="card-body">
+                                    <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
+                                    <p class="card-text">{{$curriculum->description}}</p>
+                                    <div class="btn-icon-list">
+                                        <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من ذلك  ؟')" ><i class="typcn typcn-trash"></i></button>
+                                        </form>
+
+                                        <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                        @if($curriculum->status=='active')
+                                            <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                        @else
+                                            <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+
+                                        @endif
+                                        <span class="badge badge-pill badge-primary-transparent mr-2">عدد المستويات {{count($curriculum->levels)}}  </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+            @endforeach
+        @endif
 
     </div>
     <!-- row closed -->

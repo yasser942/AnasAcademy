@@ -20,11 +20,18 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                     <div class="card">
                         <div class="card-header pb-0">
-                            <div class="d-flex justify-content-between">
-                                <h4 class="card-title mg-b-0">قائمة المستخدمين</h4>
-                                <i class="mdi mdi-dots-horizontal text-gray"></i>
-                            </div>
+
+                            <form action="{{ route('user.index') }}" method="GET">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-append">
+                                        <button onclick="showLoader();" class="btn ripple btn-primary" type="submit">ابحث</button>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="أدخل إيميل المستخدم للبحث عنه" name="email" value="{{ request('email') }}">
+                                </div>
+                            </form>
+
                         </div>
+
                         <div class="card-body">
                             <div class="table-responsive border-top userlist-table">
                                 <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
@@ -36,7 +43,7 @@
                                         <th class="wd-lg-8p"><span>نوع المستخدم</span></th>
                                         <th class="wd-lg-8p"><span>الحالة</span></th>
                                         <th class="wd-lg-8p"><span>العضوية</span></th>
-                                        <th class="wd-lg-8p"><span>الأيام المتبقية</span></th>
+                                        <th class="wd-lg-8p"><span>الوقت المتبقي</span></th>
                                         <th class="wd-lg-8p"><span>الإيميل</span></th>
                                         <th class="wd-lg-20p"><span>تاريخ الإنشاء</span></th>
                                         <th class="wd-lg-20p">إجراء</th>

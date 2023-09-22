@@ -45,7 +45,15 @@
                                                             @error('password')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-														</div><button class="btn btn-primary-gradient btn-block">تسجيل الدخول</button>
+														</div>
+                                                        <div class="checkbox mb-4">
+                                                            <div class="custom-checkbox custom-control">
+
+                                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-2" name="remember">
+                                                                <label for="checkbox-2" class="custom-control-label mt-1">تذكرني</label>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary-gradient btn-block">تسجيل الدخول</button>
 
 													</form>
 													<div class="main-signin-footer mt-5">

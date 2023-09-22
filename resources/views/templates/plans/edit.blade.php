@@ -24,7 +24,7 @@
                     <textarea class="form-control" placeholder="وصف الخطة" rows="3" name="description">{{$plan->description}}</textarea>
                 </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث الخطة</button>
+            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">تحديث الخطة</button>
 
         </form>
     </div>

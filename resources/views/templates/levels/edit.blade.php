@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">تحديث المستوى</button>
+            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">تحديث المستوى</button>
 
         </form>
     </div>

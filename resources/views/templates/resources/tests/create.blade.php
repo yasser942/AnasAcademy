@@ -32,7 +32,7 @@
                 </div>
 
 
-            <button type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الاختبار</button>
+            <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">إنشاء الاختبار</button>
 
         </form>
     </div>

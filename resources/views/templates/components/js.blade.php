@@ -108,12 +108,23 @@
 <!--Internal Chart Morris js -->
 <script src="{{asset('assets/js/chart.morris.js')}}"></script>
 
+<!--Internal Counters -->
+<script src="{{asset('assets/plugins/counters/waypoints.min.js')}}"></script>
+<script src="{{asset('assets/plugins/counters/counterup.min.js')}}"></script>
 
+
+<!--Internal Time Counter -->
+<script src="{{asset('assets/plugins/counters/jquery.missofis-countdown.js')}}"></script>
+<script src="{{asset('assets/plugins/counters/counter.js')}}"></script>
 
 
 <!-- Include this JavaScript after your HTML audio elements -->
 
 
+<script>
+    // Hide the loader when the page is fully loaded
+    window.addEventListener('load', hideLoader);
+</script>
 <script>
     let audioElement; // The audio element
 
