@@ -45,43 +45,91 @@
                                     </thead>
                                     <tbody>
                                     @foreach($wordCategories as $category)
-                                        <tr>
+                                        @if($category->status=='active')
+                                            <tr>
 
-                                            <td><a href="{{route('word-category.show',$category->id)}}">{{$category->name}}</a></td>
-                                            <td>{{$category-> description}}</td>
+                                                <td><a href="{{route('word-category.show',$category->id)}}">{{$category->name}}</a>
+                                                    @if ($category->isNew())
+                                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                @endif
+                                                <td>{{$category-> description}}</td>
 
-                                            <td>
-                                                {{$category->created_at->diffForHumans() }}   <div class="badge bg-success text-white ">جديد</div>
+                                                <td>
+                                                    {{$category->created_at->diffForHumans() }}
 
-                                            </td>
-                                            <td>{{$category-> cards->count()}}</td>
-
-                                        @if($category->status =='active')
-                                                <td class="text-center">
-                                                    <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
                                                 </td>
-                                            @else
-                                                <td class="text-center">
-                                                    <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                <td>{{$category-> cards->count()}}</td>
+
+                                                @if($category->status =='active')
+                                                    <td class="text-center">
+                                                        <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                    </td>
+                                                @endif
+
+
+                                                <td>
+
+                                                    <div class="btn-icon-list">
+                                                        <form method="POST" action="{{route('word-category.delete',$category->id)}}" class="ml-2">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                        </form>
+
+                                                        <a href="{{route('word-category.edit',$category->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                    </div>
+
                                                 </td>
+                                            </tr>
+                                        @else
+                                            @if(auth()->user()->hasRole('أدمن'))
+                                                <tr>
+
+                                                    <td><a href="{{route('word-category.show',$category->id)}}">{{$category->name}}</a> @if ($category->isNew())
+                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                        @endif</td>
+                                                    <td>{{$category-> description}}</td>
+
+                                                    <td>
+                                                        {{$category->created_at->diffForHumans() }}   <div class="badge bg-success text-white ">جديد</div>
+
+                                                    </td>
+                                                    <td>{{$category-> cards->count()}}</td>
+
+                                                    @if($category->status =='active')
+                                                        <td class="text-center">
+                                                            <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                        </td>
+                                                    @endif
+
+
+                                                    <td>
+
+                                                        <div class="btn-icon-list">
+                                                            <form method="POST" action="{{route('word-category.delete',$category->id)}}" class="ml-2">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                            </form>
+
+                                                            <a href="{{route('word-category.edit',$category->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
                                             @endif
-
-
-                                            <td>
-
-                                                <div class="btn-icon-list">
-                                                    <form method="POST" action="{{route('word-category.delete',$category->id)}}" class="ml-2">
-                                                        @csrf
-                                                        @method('DELETE')
-
-                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
-                                                    </form>
-
-                                                    <a href="{{route('word-category.edit',$category->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
-                                                   </div>
-
-                                            </td>
-                                        </tr>
+                                        @endif
                                     @endforeach
 
                                     </tbody>

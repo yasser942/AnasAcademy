@@ -24,157 +24,349 @@
             </div>
         @else
             @foreach($lesson->videos as $video)
-                <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-                    <div class="card card-success">
-                        <div class="card-header pb-0">
-                            <a href="{{route('video.show',$video->id)}}"><h5 class="card-title mb-0 pb-0">{{$video->name}}</h5></a>
-                        </div>
-                        <div class="card-body text-success">
-                            {{$video->description}}
-                        </div>
-                        <div class="card-footer d-flex align-items-center">
-                            <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
-                                @csrf
-                                @method('DELETE')
+                @if($video->status=='active')
+                    <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                        <div class="card card-success">
+                            <div class="card-header pb-0">
+                                <a href="{{route('video.show',$video->id)}}"><h5 class="card-title mb-0 pb-0">{{$video->name}}</h5></a>
+                            </div>
+                            <div class="card-body text-success">
+                                {{$video->description}}
+                            </div>
+                            <div class="card-footer d-flex align-items-center">
+                                <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                    <i class="typcn typcn-trash"></i>
-                                </button>
-                            </form>
+                                    <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                        <i class="typcn typcn-trash"></i>
+                                    </button>
+                                </form>
 
-                            <a href="{{route('video.edit',$video->id)}}" class="btn btn-info-gradient btn-icon mr-2">
-                                <i class="typcn typcn-edit"></i>
-                            </a>
+                                <a href="{{route('video.edit',$video->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                    <i class="typcn typcn-edit"></i>
+                                </a>
 
-                            @if($video->status=='active')
-                                <span class="badge badge-pill badge-success mr-2">مفعل</span>
-                            @else
-                                <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
-                            @endif
+                                @if($video->status=='active')
+                                    <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                @else
+                                    <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                @endif
 
-                            <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
-                            <span class="badge badge-pill badge-primary-transparent mr-2">فيديو</span>
+                                <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                <span class="badge badge-pill badge-primary-transparent mr-2">فيديو</span>
+                                @if ($video->isNew())
+                                    <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                @endif
 
 
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    @if(auth()->user()->hasRole('أدمن'))
+                        <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                            <div class="card card-success">
+                                <div class="card-header pb-0">
+                                    <a href="{{route('video.show',$video->id)}}"><h5 class="card-title mb-0 pb-0">{{$video->name}}</h5></a>
+                                </div>
+                                <div class="card-body text-success">
+                                    {{$video->description}}
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+                                    <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                            <i class="typcn typcn-trash"></i>
+                                        </button>
+                                    </form>
+
+                                    <a href="{{route('video.edit',$video->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                        <i class="typcn typcn-edit"></i>
+                                    </a>
+
+                                    @if($video->status=='active')
+                                        <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                    @endif
+
+                                    <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                    <span class="badge badge-pill badge-primary-transparent mr-2">فيديو</span>
+                                    @if ($video->isNew())
+                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                    @endif
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    @endif
+                @endif
             @endforeach
             @foreach($lesson->pdfs as $pdf)
-                <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-                    <div class="card card-primary">
-                        <div class="card-header pb-0">
-                            <a href="{{route('pdf.show',$pdf->id)}}"><h5 class="card-title mb-0 pb-0">{{$pdf->name}}</h5></a>
+                    @if($pdf->status=='active')
+                        <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                            <div class="card card-primary">
+                                <div class="card-header pb-0">
+                                    <a href="{{route('pdf.show',$pdf->id)}}"><h5 class="card-title mb-0 pb-0">{{$pdf->name}}</h5></a>
+                                </div>
+                                <div class="card-body text-primary">
+                                    {{$pdf->description}}
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+                                    <form method="POST" action="{{route('pdf.delete',$pdf->id)}}" class="ml-2">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                            <i class="typcn typcn-trash"></i>
+                                        </button>
+                                    </form>
+
+                                    <a href="{{route('pdf.edit',$pdf->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                        <i class="typcn typcn-edit"></i>
+                                    </a>
+
+                                    @if($pdf->status=='active')
+                                        <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                    @endif
+
+                                    <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                    <span class="badge badge-pill badge-primary-transparent mr-2">PDF</span>
+                                    @if ($pdf->isNew())
+                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                    @endif
+
+
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body text-primary">
-                            {{$pdf->description}}
-                        </div>
-                        <div class="card-footer d-flex align-items-center">
-                            <form method="POST" action="{{route('pdf.delete',$pdf->id)}}" class="ml-2">
-                                @csrf
-                                @method('DELETE')
+                    @else
+                        @if(auth()->user()->hasRole('أدمن'))
+                            <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                                <div class="card card-primary">
+                                    <div class="card-header pb-0">
+                                        <a href="{{route('pdf.show',$pdf->id)}}"><h5 class="card-title mb-0 pb-0">{{$pdf->name}}</h5></a>
+                                    </div>
+                                    <div class="card-body text-primary">
+                                        {{$pdf->description}}
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center">
+                                        <form method="POST" action="{{route('pdf.delete',$pdf->id)}}" class="ml-2">
+                                            @csrf
+                                            @method('DELETE')
 
-                                <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                    <i class="typcn typcn-trash"></i>
-                                </button>
-                            </form>
+                                            <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                <i class="typcn typcn-trash"></i>
+                                            </button>
+                                        </form>
 
-                            <a href="{{route('pdf.edit',$pdf->id)}}" class="btn btn-info-gradient btn-icon mr-2">
-                                <i class="typcn typcn-edit"></i>
-                            </a>
+                                        <a href="{{route('pdf.edit',$pdf->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                            <i class="typcn typcn-edit"></i>
+                                        </a>
 
-                            @if($pdf->status=='active')
-                                <span class="badge badge-pill badge-success mr-2">مفعل</span>
-                            @else
-                                <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
-                            @endif
+                                        @if($pdf->status=='active')
+                                            <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                        @else
+                                            <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                        @endif
 
-                            <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
-                            <span class="badge badge-pill badge-primary-transparent mr-2">PDF</span>
+                                        <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                        <span class="badge badge-pill badge-primary-transparent mr-2">PDF</span>
+                                        @if ($pdf->isNew())
+                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                        @endif
 
 
 
-                        </div>
-                    </div>
-                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endif
+                    @endif
             @endforeach
             @foreach($lesson->tests as $test)
-                    <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-                        <div class="card card-warning">
-                            <div class="card-header pb-0">
-                                <a href="{{route('test.show',$test->id)}}"><h5 class="card-title mb-0 pb-0">{{$test->name}}</h5></a>
-                            </div>
-                            <div class="card-body text-warning">
-                                {{$test->description}}
-                            </div>
-                            <div class="card-footer d-flex align-items-center">
-                                <form method="POST" action="{{route('test.delete',$test->id)}}" class="ml-2">
-                                    @csrf
-                                    @method('DELETE')
+                    @if($test->status=='active')
+                        <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                            <div class="card card-warning">
+                                <div class="card-header pb-0">
+                                    <a href="{{route('test.show',$test->id)}}"><h5 class="card-title mb-0 pb-0">{{$test->name}}</h5></a>
+                                </div>
+                                <div class="card-body text-warning">
+                                    {{$test->description}}
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+                                    <form method="POST" action="{{route('test.delete',$test->id)}}" class="ml-2">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                        <i class="typcn typcn-trash"></i>
-                                    </button>
-                                </form>
+                                        <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                            <i class="typcn typcn-trash"></i>
+                                        </button>
+                                    </form>
 
-                                <a href="{{route('test.edit',$test->id)}}" class="btn btn-info-gradient btn-icon mr-2">
-                                    <i class="typcn typcn-edit"></i>
-                                </a>
+                                    <a href="{{route('test.edit',$test->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                        <i class="typcn typcn-edit"></i>
+                                    </a>
 
-                                @if($test->status=='active')
-                                    <span class="badge badge-pill badge-success mr-2">مفعل</span>
-                                @else
-                                    <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
-                                @endif
+                                    @if($test->status=='active')
+                                        <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                    @endif
 
-                                <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
-                                <span class="badge badge-pill badge-primary-transparent mr-2">إختبار</span>
+                                    <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                    <span class="badge badge-pill badge-primary-transparent mr-2">إختبار</span>
+                                    @if ($test->isNew())
+                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                    @endif
 
 
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @else
+                        @if(auth()->user()->hasRole('أدمن'))
+                            <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                                <div class="card card-warning">
+                                    <div class="card-header pb-0">
+                                        <a href="{{route('test.show',$test->id)}}"><h5 class="card-title mb-0 pb-0">{{$test->name}}</h5></a>
+                                    </div>
+                                    <div class="card-body text-warning">
+                                        {{$test->description}}
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center">
+                                        <form method="POST" action="{{route('test.delete',$test->id)}}" class="ml-2">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                <i class="typcn typcn-trash"></i>
+                                            </button>
+                                        </form>
+
+                                        <a href="{{route('test.edit',$test->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                            <i class="typcn typcn-edit"></i>
+                                        </a>
+
+                                        @if($test->status=='active')
+                                            <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                        @else
+                                            <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                        @endif
+
+                                        <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                        <span class="badge badge-pill badge-primary-transparent mr-2">إختبار</span>
+                                        @if ($test->isNew())
+                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                        @endif
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endif
+                    @endif
+            @endforeach
             @foreach($lesson->practicalTests as $practicalTest)
-                    <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-                        <div class="card card-danger">
-                            <div class="card-header pb-0">
-                                <a href="{{route('practical-test.show',$practicalTest->id)}}"><h5 class="card-title mb-0 pb-0">{{$practicalTest->name}}</h5></a>
-                            </div>
-                            <div class="card-body text-danger">
-                                {{$practicalTest->description}}
-                            </div>
-                            <div class="card-footer d-flex align-items-center">
-                                <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
-                                    @csrf
-                                    @method('DELETE')
+                    @if($practicalTest->status=='active')
+                        <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                            <div class="card card-danger">
+                                <div class="card-header pb-0">
+                                    <a href="{{route('practical-test.show',$practicalTest->id)}}"><h5 class="card-title mb-0 pb-0">{{$practicalTest->name}}</h5></a>
+                                </div>
+                                <div class="card-body text-danger">
+                                    {{$practicalTest->description}}
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+                                    <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                        <i class="typcn typcn-trash"></i>
-                                    </button>
-                                </form>
+                                        <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                            <i class="typcn typcn-trash"></i>
+                                        </button>
+                                    </form>
 
-                                <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
-                                    <i class="typcn typcn-edit"></i>
-                                </a>
+                                    <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                        <i class="typcn typcn-edit"></i>
+                                    </a>
 
-                                @if($practicalTest->status=='active')
-                                    <span class="badge badge-pill badge-success mr-2">مفعل</span>
-                                @else
-                                    <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
-                                @endif
+                                    @if($practicalTest->status=='active')
+                                        <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                    @endif
 
-                                <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
-                                <span class="badge badge-pill badge-primary-transparent mr-2">إختبار تفاعلي</span>
+                                    <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                    <span class="badge badge-pill badge-primary-transparent mr-2">إختبار تفاعلي</span>
+                                    @if ($practicalTest->isNew())
+                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                    @endif
 
 
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @else
+                        @if(auth()->user()->hasRole('أدمن'))
+                            <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+                                <div class="card card-danger">
+                                    <div class="card-header pb-0">
+                                        <a href="{{route('practical-test.show',$practicalTest->id)}}"><h5 class="card-title mb-0 pb-0">{{$practicalTest->name}}</h5></a>
+                                    </div>
+                                    <div class="card-body text-danger">
+                                        {{$practicalTest->description}}
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center">
+                                        <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-danger-gradient btn-icon" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                <i class="typcn typcn-trash"></i>
+                                            </button>
+                                        </form>
+
+                                        <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
+                                            <i class="typcn typcn-edit"></i>
+                                        </a>
+
+                                        @if($practicalTest->status=='active')
+                                            <span class="badge badge-pill badge-success mr-2">مفعل</span>
+                                        @else
+                                            <span class="badge badge-pill badge-danger mr-2"> غير مفعل</span>
+                                        @endif
+
+                                        <span class="badge badge-pill badge-danger-transparent mr-2">{{$lesson->name}}</span>
+                                        <span class="badge badge-pill badge-primary-transparent mr-2">إختبار تفاعلي</span>
+                                        @if ($practicalTest->isNew())
+                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                        @endif
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endif
+                    @endif
+            @endforeach
 
         @endif
     </div>

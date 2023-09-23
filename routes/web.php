@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.signin');
 });
 Route::prefix('plan')->controller(PlanController::class)->group(function () {
     Route::get('/', 'index')->name('plan.index')->middleware([

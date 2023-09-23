@@ -36,42 +36,96 @@
                                     </thead>
                                     <tbody>
                                     @foreach($exams as $exam)
-                                        <tr>
+                                        @if($exam->status=='active')
+                                            <tr>
 
-                                            <td><a href="{{route('exam.show',$exam->id)}}">{{$exam->name}} @if ($exam->isNew())
-                                                        <div class="badge bg-success text-white m-2 ">جديد</div>
-                                @endif</div></a></td>
-                                            <td>{{$exam-> description}}</td>
-                                            <td>{{$exam-> level}}</td>
+                                                <td>
+                                                    <a href="{{route('exam.show',$exam->id)}}">{{$exam->name}}
+                                                        @if ($exam->isNew())
+                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                        @endif
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                {{$exam->created_at->diffForHumans() }}
-                                            </td>
-                                            @if($exam->status =='active')
-                                                <td class="text-center">
-                                                    <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                <td>{{$exam-> description}}</td>
+                                                <td>{{$exam-> level}}</td>
+
+                                                <td>
+                                                    {{$exam->created_at->diffForHumans() }}
                                                 </td>
-                                            @else
-                                                <td class="text-center">
-                                                    <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                @if($exam->status =='active')
+                                                    <td class="text-center">
+                                                        <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                    </td>
+                                                @endif
+
+
+                                                <td>
+
+                                                    <div class="btn-icon-list">
+                                                        <form method="POST" action="{{route('exam.delete',$exam->id)}}" class="ml-2">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                        </form>
+
+                                                        <a href="{{route('exam.edit',$exam->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                    </div>
+
                                                 </td>
+                                            </tr>
+
+                                        @else
+                                            @if(auth()->user()->hasRole('أدمن'))
+                                                <tr>
+
+                                                    <td>
+                                                        <a href="{{route('exam.show',$exam->id)}}">{{$exam->name}}
+                                                            @if ($exam->isNew())
+                                                                <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                            @endif
+                                                        </a>
+                                                    </td>
+
+                                                    <td>{{$exam-> description}}</td>
+                                                    <td>{{$exam-> level}}</td>
+
+                                                    <td>
+                                                        {{$exam->created_at->diffForHumans() }}
+                                                    </td>
+                                                    @if($exam->status =='active')
+                                                        <td class="text-center">
+                                                            <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                        </td>
+                                                    @endif
+
+
+                                                    <td>
+
+                                                        <div class="btn-icon-list">
+                                                            <form method="POST" action="{{route('exam.delete',$exam->id)}}" class="ml-2">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                            </form>
+
+                                                            <a href="{{route('exam.edit',$exam->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
+
                                             @endif
-
-
-                                            <td>
-
-                                                <div class="btn-icon-list">
-                                                    <form method="POST" action="{{route('exam.delete',$exam->id)}}" class="ml-2">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
-                                                    </form>
-
-                                                    <a href="{{route('exam.edit',$exam->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
-                                                   </div>
-
-                                            </td>
-                                        </tr>
+                                        @endif
                                     @endforeach
 
                                     </tbody>

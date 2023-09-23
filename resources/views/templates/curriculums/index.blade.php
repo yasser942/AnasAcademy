@@ -50,7 +50,9 @@
 
                                     @endif
                                     <span class="badge badge-pill badge-primary-transparent mr-2">عدد المستويات {{count($curriculum->levels)}}  </span>
-
+                                    @if ($curriculum->isNew())
+                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -78,6 +80,9 @@
 
                                         @endif
                                         <span class="badge badge-pill badge-primary-transparent mr-2">عدد المستويات {{count($curriculum->levels)}}  </span>
+                                        @if ($curriculum->isNew())
+                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                        @endif
 
                                     </div>
                                 </div>

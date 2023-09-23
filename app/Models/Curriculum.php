@@ -19,4 +19,8 @@ class Curriculum extends Model
     {
         return $this->hasMany(\App\Models\Level::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }

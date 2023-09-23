@@ -22,4 +22,8 @@ class Lesson extends Model
     public function tests() { return $this->hasMany(Test::class); }
     public function videos(){ return $this->hasMany(Video::class); }
     public function practicalTests(){ return $this->hasMany(PracticalTest::class); }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }

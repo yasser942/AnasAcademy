@@ -31,7 +31,7 @@ class CheckPlanExpiration extends Command
     {
         // Get users with plans that have exactly 3 days left
         $usersWithExpiringPlans = User::whereHas('plans', function ($query) {
-            $query->where('end_date', '=', now()->addDays(5)->toDateString());
+            $query->where('end_date', '=', now()->addDays(3)->toDateString());
         })->get();
 
 

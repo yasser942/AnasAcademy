@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curriculum;
+use App\Models\Exam;
 use App\Models\Level;
 use App\Models\Unit;
 use App\Models\User;
@@ -17,13 +18,14 @@ class AdminDashboardController extends Controller
         $curriculums = Curriculum::all();
         $levels = Level::all();
         $units = Unit::all();
+        $exams = Exam::all();
         $user = User::findOrFail(auth()->user()->id);
         $remainingTime = $user->remainingTime();
 
 
         return view('templates/main', compact( 'users',
             'curriculums', 'levels','remainingTime',
-            'units'));
+            'exams', 'units'));
     }
 
 }

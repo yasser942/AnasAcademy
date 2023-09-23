@@ -17,4 +17,8 @@ class WordCategory extends Model
     {
         return $this->hasMany(Card::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }

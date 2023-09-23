@@ -38,17 +38,33 @@
                                                 <form method="POST" action="{{ route('register') }}" >
                                                     @csrf
 													<div class="form-group">
-														<label>الاسم الكامل</label> <input class="form-control" placeholder="أدخل الاسم الكامل" type="text" name="name" required value="{{old('name')}}">
+														<label>الاسم الكامل</label>
+                                                        <input class="form-control" placeholder="أدخل الاسم الكامل" type="text" name="name" required value="{{old('name')}}">
+                                                        @error('name')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
 													</div>
 													<div class="form-group">
-														<label>الإيميل</label> <input class="form-control" placeholder="أدخل الإيميل الخاص بك" type="text" name="email" required value="{{old('email')}}">
+														<label>الإيميل</label>
+                                                        <input class="form-control" placeholder="أدخل الإيميل الخاص بك" type="text" name="email" required value="{{old('email')}}">
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
 													</div>
 													<div class="form-group">
-														<label>كلمة المرور</label> <input class="form-control" placeholder="أدخل كلمة مرور" type="password" name="password" required>
+														<label>كلمة المرور</label>
+                                                        <input class="form-control" placeholder="أدخل كلمة مرور" type="password" name="password" required>
+                                                        @error('password')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
 													</div>
 
                                                     <div class="form-group">
-                                                        <label>تأكيد كلمة المرور</label> <input class="form-control" placeholder="أعد كتابة كلمة المرور" type="password" name="password_confirmation" required>
+                                                        <label>تأكيد كلمة المرور</label>
+                                                        <input class="form-control" placeholder="أعد كتابة كلمة المرور" type="password" name="password_confirmation" required>
+                                                        @error('password_confirmation')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div><button type="submit" class="btn btn-primary-gradient btn-block">إنشاء حساب</button>
 
 												</form>

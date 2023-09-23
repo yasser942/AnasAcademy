@@ -23,4 +23,8 @@ class Test extends Model
     {
         return $this->hasMany(Question::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }

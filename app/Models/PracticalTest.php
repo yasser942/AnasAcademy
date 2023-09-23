@@ -19,4 +19,8 @@ class PracticalTest extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }

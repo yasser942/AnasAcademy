@@ -40,39 +40,83 @@
                                     </thead>
                                     <tbody>
                                     @foreach($lessons as $lesson)
-                                        <tr>
+                                        @if($lesson->status=='active')
+                                            <tr>
 
-                                            <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a></td>
-                                            <td>{{$lesson-> description}}</td>
-                                            <td>
-                                                {{$lesson->created_at->diffForHumans() }}
-                                            </td>
-                                            @if($lesson->status =='active')
-                                                <td class="text-center">
-                                                    <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a>
+                                                    @if ($lesson->isNew())
+                                                        <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                    @endif</td>
+                                                <td>{{$lesson-> description}}</td>
+                                                <td>
+                                                    {{$lesson->created_at->diffForHumans() }}
                                                 </td>
-                                            @else
-                                                <td class="text-center">
-                                                    <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                @if($lesson->status =='active')
+                                                    <td class="text-center">
+                                                        <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                    </td>
+                                                @endif
+
+
+                                                <td>
+
+                                                    <div class="btn-icon-list">
+                                                        <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                        </form>
+
+                                                        <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                    </div>
+
                                                 </td>
+                                            </tr>
+                                        @else
+                                            @if(auth()->user()->hasRole('أدمن'))
+                                                <tr>
+
+                                                    <td><a href="{{route('lesson.show',$lesson->id)}}">{{$lesson->name}}</a>  @if ($lesson->isNew())
+                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                        @endif</td>
+                                                    <td>{{$lesson-> description}}</td>
+                                                    <td>
+                                                        {{$lesson->created_at->diffForHumans() }}
+                                                    </td>
+                                                    @if($lesson->status =='active')
+                                                        <td class="text-center">
+                                                            <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                                        </td>
+                                                    @endif
+
+
+                                                    <td>
+
+                                                        <div class="btn-icon-list">
+                                                            <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                            </form>
+
+                                                            <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
                                             @endif
-
-
-                                            <td>
-
-                                                <div class="btn-icon-list">
-                                                    <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
-                                                        @csrf
-                                                        @method('DELETE')
-
-                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
-                                                    </form>
-
-                                                    <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
-                                                   </div>
-
-                                            </td>
-                                        </tr>
+                                        @endif
                                     @endforeach
 
                                     </tbody>

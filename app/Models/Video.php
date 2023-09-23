@@ -12,4 +12,8 @@ class Video extends Model
     public function lesson(){
         return $this->belongsTo(Lesson::class);
     }
+    public function isNew()
+    {
+        return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));
+    }
 }
