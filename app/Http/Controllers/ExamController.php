@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateExamRequest;
 use App\Models\Exam;
+use App\Models\PracticalExam;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -13,8 +14,9 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::paginate(10);
-        return view('templates.exams.index', compact('exams'));
+        $exams = Exam::latest()->get();
+        $practiceExams = PracticalExam::latest()->get();
+        return view('templates.exams.index', compact('exams', 'practiceExams'));
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PracticalExamController;
 use App\Http\Controllers\PracticalTestController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
@@ -194,6 +195,26 @@ Route::middleware([
         Route::get('/edit/{id}', 'edit')->name('practical-test.edit');
         Route::put('/update/{id}', 'update')->name('practical-test.update');
         Route::delete('/delete/{id}', 'destroy')->name('practical-test.delete');
+    });
+
+    Route::prefix('practical-exam')->controller(PracticalExamController::class)->group(function () {
+        Route::get('/', 'index')->name('practical-exam.index');
+        Route::get('/create', 'create')->name('practical-exam.create');
+        Route::get('/show/{id}', 'show')->name('practical-exam.show');
+        Route::post('/store', 'store')->name('practical-exam.store');
+        Route::get('/edit/{id}', 'edit')->name('practical-exam.edit');
+        Route::put('/update/{id}', 'update')->name('practical-exam.update');
+        Route::delete('/delete/{id}', 'destroy')->name('practical-exam.delete');
+    });
+    Route::prefix('practical-card')->controller(\App\Http\Controllers\PracticalCardController::class)->group(function () {
+        Route::get('/', 'index')->name('practical-card.index');
+        Route::get('/create', 'create')->name('practical-card.create');
+        Route::get('/show/{id}', 'show')->name('practical-card.show');
+        Route::post('/store', 'store')->name('practical-card.store');
+        Route::get('/edit/{id}', 'edit')->name('practical-card.edit');
+        Route::put('/update/{id}', 'update')->name('practical-card.update');
+        Route::delete('/delete/{id}', 'destroy')->name('practical-card.delete');
+
     });
 
     Route::get('exam-question/{id}',[ExamQuestionController::class,'create'])->name('exam-question.create');

@@ -60,6 +60,8 @@
                     <li><a class="slide-item" href="{{route('word-category.index')}}">بطاقات الكلمات</a></li>
 
                         <li><a class="slide-item" href="{{route('card.favorite')}}">كلماتي</a></li>
+                      <li><a class="slide-item" href="{{route('practical-card.index')}}">البطاقات التفاعلية</a></li>
+
 
 
                 </ul>
