@@ -82,9 +82,33 @@ class CardController extends Controller
         $card = Card::findOrFail($id);
         $word_category_id = $card->word_category_id;
         $request['word_category_id'] = $word_category_id;
-        $card->update($request->validated());
+
+        // Check if a new audio file is uploaded
+        if ($request->hasFile('audio')) {
+            // Delete the old audio file if it exists
+            if ($card->audio) {
+                Storage::delete('public/audio/' . $card->audio);
+            }
+
+            // Upload the new audio file
+            $audioFile = $request->file('audio');
+            $audioFileName = hash('sha256', time() . $audioFile->getClientOriginalName()) . '.' . $audioFile->getClientOriginalExtension();
+            $audioFile->storeAs('public/audio', $audioFileName);
+
+            // Update the card data including the new audio file name
+            $cardData = $request->validated();
+            $cardData['audio'] = $audioFileName;
+        } else {
+            // If no new audio uploaded, keep the old audio file name
+            $cardData = $request->except('audio');
+        }
+
+        // Update the card
+        $card->update($cardData);
+
         return redirect()->route('word-category.show', $card->word_category_id)->with('success', 'تم تعديل الكلمة بنجاح');
     }
+
 
     /**
      * Remove the specified resource from storage.

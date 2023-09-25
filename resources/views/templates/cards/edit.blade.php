@@ -27,6 +27,17 @@
                 <label for="exampleInputEmail1">الجملة بالعربية</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" placeholder="الجملة بالعربية" name="sentence_translation" value="{{$card->sentence_translation}}">
             </div>
+            <div class="form-group">
+                <label for="audio_file">حمل الملف الصوتي</label>
+                <input type="file" name="audio" id="audio_file" class="form-control-file" accept="audio/*">
+                @if($card->audio)
+                    <audio controls>
+                        <source src="{{ Storage::url('audio/' . $card->audio) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                @endif
+            </div>
+
 
 
 

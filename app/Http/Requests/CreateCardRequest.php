@@ -19,15 +19,24 @@ class CreateCardRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules()
     {
-        return [
+        $rules = [
             'word' => 'required|string',
             'word_translation' => 'required|string',
             'sentence' => 'required|string',
             'sentence_translation' => 'required|string',
-            'audio' => 'required|file|mimes:mp3,wav',
             'word_category_id' => 'required|exists:word_categories,id',
         ];
+
+        // Conditionally make the audio field required only if a new audio file is uploaded
+        if ($this->hasFile('audio')) {
+            $rules['audio'] = 'required|file|mimes:mp3,wav';
+        } else {
+            $rules['audio'] = 'nullable'; // Make it nullable if no new audio file is uploaded
+        }
+
+        return $rules;
     }
+
 }

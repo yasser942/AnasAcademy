@@ -13,7 +13,7 @@
     <title>أكاديمية أنس</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
+    <link rel="icon" href="{{asset('assets/img/media/login.png')}}" type="image/x-icon"/>
 
     <!-- Icons css -->
     <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet">
