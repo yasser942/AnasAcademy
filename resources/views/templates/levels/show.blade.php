@@ -4,7 +4,10 @@
     @include('templates.components.session-messages')
 
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('unit.create',$level->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء وحدة جديدة</a></div>
+        @endif
     </div>
 
     <div class="row mt-4">
@@ -25,6 +28,8 @@
                                 {{$unit->description}}
                             </div>
                             <div class="card-footer d-flex align-items-center">
+                                @if(auth()->user()->isAdmin())
+
                                 <form method="POST" action="{{route('unit.delete',$unit->id)}}" class="ml-2">
                                     @csrf
                                     @method('DELETE')
@@ -37,6 +42,7 @@
                                 <a href="{{route('unit.edit',$unit->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                     <i class="typcn typcn-edit"></i>
                                 </a>
+                                @endif
 
                                 @if($unit->status=='active')
                                     <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -63,6 +69,8 @@
                                     {{$unit->description}}
                                 </div>
                                 <div class="card-footer d-flex align-items-center">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('unit.delete',$unit->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -75,6 +83,7 @@
                                     <a href="{{route('unit.edit',$unit->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
+                                    @endif
 
                                     @if($unit->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>

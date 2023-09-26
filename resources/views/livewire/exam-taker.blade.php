@@ -19,12 +19,14 @@
                             <p class="text-danger">الجواب الصحيح : {{ $question['options'][$question['options']['correct']] }}</p>
                         @endif
                     @endif
-                   <div class="row  "  >
+                    @if(auth()->user()->isAdmin())
+
+                    <div class="row  "  >
                        <button  wire:click="deleteQuestion({{ $index }})" class="btn btn-danger m-2">حذف السؤال</button>
 
-                       <a href="#"   class="btn btn-warning m-2 text-white">تعديل السؤال</a>
 
                    </div>
+                     @endif
 
 
 

@@ -2,7 +2,10 @@
 @section('content')
 
     <div class="row row-xs wd-xl-80p mb-4">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('plan.create')}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء خطة جديدة</a></div>
+        @endif
     </div>    <!-- row -->
     @if(auth()->user()->isPlanExpired())
         <div  class="col-sm-6 col-md-" >
@@ -30,6 +33,8 @@
 
                         </ul>
                         <div class="panel-footer text-center">
+                            @if(auth()->user()->isAdmin())
+
                             <a class="btn btn-warning-gradient" href="{{ route('plan.edit', $plan->id) }}">
                                 <i class="fa fa-edit"></i> تعديل
                             </a>
@@ -41,6 +46,7 @@
                                     <i class="fa fa-trash"></i> حذف
                                 </button>
                             </form>
+                            @endif
                         </div>
 
                     </div>
@@ -61,6 +67,8 @@
 
                             </ul>
                             <div class="panel-footer text-center">
+                                @if(auth()->user()->isAdmin())
+
                                 <a class="btn btn-warning-gradient" href="{{ route('plan.edit', $plan->id) }}">
                                     <i class="fa fa-edit"></i> تعديل
                                 </a>
@@ -72,6 +80,7 @@
                                         <i class="fa fa-trash"></i> حذف
                                     </button>
                                 </form>
+                                @endif
                             </div>
 
                         </div>

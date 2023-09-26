@@ -4,7 +4,10 @@
    @include('templates.components.session-messages')
 
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('level.create',$curriculum->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء مستوى جديد</a></div>
+        @endif
     </div>
 
 
@@ -26,6 +29,8 @@
                                 <a href="{{route('level.show',$level->id)}}"><h4 class="card-title mb-3">{{$level->name}}</h4></a>
                                 <p class="card-text">{{$level->description}}</p>
                                 <div class="btn-icon-list">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('level.delete',$level->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -34,6 +39,7 @@
                                     </form>
 
                                     <a href="{{route('level.edit',$level->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                    @endif
                                     @if($level->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
                                     @else
@@ -59,6 +65,8 @@
                                     <a href="{{route('level.show',$level->id)}}"><h4 class="card-title mb-3">{{$level->name}}</h4></a>
                                     <p class="card-text">{{$level->description}}</p>
                                     <div class="btn-icon-list">
+                                        @if(auth()->user()->isAdmin())
+
                                         <form method="POST" action="{{route('level.delete',$level->id)}}" class="ml-2">
                                             @csrf
                                             @method('DELETE')
@@ -67,6 +75,7 @@
                                         </form>
 
                                         <a href="{{route('level.edit',$level->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                        @endif
                                         @if($level->status=='active')
                                             <span class="badge badge-pill badge-success mr-2">مفعل</span>
                                         @else

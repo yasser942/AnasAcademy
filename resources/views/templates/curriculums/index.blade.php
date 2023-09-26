@@ -14,7 +14,10 @@
     @endif
 
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('curriculum.create')}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء منهج جديد</a></div>
+        @endif
     </div>
 
 
@@ -36,6 +39,7 @@
                                 <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
                                 <p class="card-text">{{$curriculum->description}}</p>
                                 <div class="btn-icon-list">
+                                    @if(auth()->user()->isAdmin())
                                     <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -43,6 +47,7 @@
                                     </form>
 
                                     <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                    @endif
                                     @if($curriculum->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
                                     @else
@@ -66,6 +71,7 @@
                                     <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
                                     <p class="card-text">{{$curriculum->description}}</p>
                                     <div class="btn-icon-list">
+                                        @if(auth()->user()->isAdmin())
                                         <form method="POST" action="{{route('curriculum.delete',$curriculum->id)}}" class="ml-2">
                                             @csrf
                                             @method('DELETE')
@@ -73,6 +79,7 @@
                                         </form>
 
                                         <a href="{{route('curriculum.edit',$curriculum->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                        @endif
                                         @if($curriculum->status=='active')
                                             <span class="badge badge-pill badge-success mr-2">مفعل</span>
                                         @else

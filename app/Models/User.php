@@ -196,6 +196,10 @@ public  function isPlanExpired() : bool
         // If there's no current plan, return 0 or any other appropriate value
         return 0;
     }
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('أدمن');
+    }
 
 
 }

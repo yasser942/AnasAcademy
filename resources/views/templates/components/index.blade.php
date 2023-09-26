@@ -1,4 +1,5 @@
 @include('templates.components.head')
+@include('templates.components.session-messages')
 
 	<body class="main-body app sidebar-mini">
 

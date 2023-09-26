@@ -5,6 +5,7 @@
 
 
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
 
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"> <button data-toggle="dropdown" class="btn btn-indigo btn-block">إنشاء مصدر <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i></button>
             <div class="dropdown-menu">
@@ -13,7 +14,9 @@
                 <a href="{{route('video.create',$lesson->id)}}" class="dropdown-item">فيديو</a>
                 <a href="{{route('practical-test.create',$lesson->id)}}" class="dropdown-item">إختبار تفاعلي </a>
 
-            </div><!-- dropdown-menu --></div>
+            </div><!-- dropdown-menu -->
+        </div>
+        @endif
     </div>
 
     <div class="row mt-4">
@@ -34,6 +37,8 @@
                                 {{$video->description}}
                             </div>
                             <div class="card-footer d-flex align-items-center">
+                                @if(auth()->user()->isAdmin())
+
                                 <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
                                     @csrf
                                     @method('DELETE')
@@ -46,6 +51,7 @@
                                 <a href="{{route('video.edit',$video->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                     <i class="typcn typcn-edit"></i>
                                 </a>
+                                @endif
 
                                 @if($video->status=='active')
                                     <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -75,6 +81,8 @@
                                     {{$video->description}}
                                 </div>
                                 <div class="card-footer d-flex align-items-center">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('video.delete',$video->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -87,6 +95,7 @@
                                     <a href="{{route('video.edit',$video->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
+                                    @endif
 
                                     @if($video->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -120,6 +129,8 @@
                                     {{$pdf->description}}
                                 </div>
                                 <div class="card-footer d-flex align-items-center">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('pdf.delete',$pdf->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -132,6 +143,7 @@
                                     <a href="{{route('pdf.edit',$pdf->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
+                                    @endif
 
                                     @if($pdf->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -161,6 +173,8 @@
                                         {{$pdf->description}}
                                     </div>
                                     <div class="card-footer d-flex align-items-center">
+                                        @if(auth()->user()->isAdmin())
+
                                         <form method="POST" action="{{route('pdf.delete',$pdf->id)}}" class="ml-2">
                                             @csrf
                                             @method('DELETE')
@@ -173,6 +187,7 @@
                                         <a href="{{route('pdf.edit',$pdf->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                             <i class="typcn typcn-edit"></i>
                                         </a>
+                                        @endif
 
                                         @if($pdf->status=='active')
                                             <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -206,6 +221,8 @@
                                     {{$test->description}}
                                 </div>
                                 <div class="card-footer d-flex align-items-center">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('test.delete',$test->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -218,6 +235,7 @@
                                     <a href="{{route('test.edit',$test->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
+                                    @endif
 
                                     @if($test->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -247,6 +265,8 @@
                                         {{$test->description}}
                                     </div>
                                     <div class="card-footer d-flex align-items-center">
+                                        @if(auth()->user()->isAdmin())
+
                                         <form method="POST" action="{{route('test.delete',$test->id)}}" class="ml-2">
                                             @csrf
                                             @method('DELETE')
@@ -259,6 +279,7 @@
                                         <a href="{{route('test.edit',$test->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                             <i class="typcn typcn-edit"></i>
                                         </a>
+                                        @endif
 
                                         @if($test->status=='active')
                                             <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -292,6 +313,8 @@
                                     {{$practicalTest->description}}
                                 </div>
                                 <div class="card-footer d-flex align-items-center">
+                                    @if(auth()->user()->isAdmin())
+
                                     <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
                                         @csrf
                                         @method('DELETE')
@@ -304,6 +327,7 @@
                                     <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
+                                    @endif
 
                                     @if($practicalTest->status=='active')
                                         <span class="badge badge-pill badge-success mr-2">مفعل</span>
@@ -333,6 +357,8 @@
                                         {{$practicalTest->description}}
                                     </div>
                                     <div class="card-footer d-flex align-items-center">
+                                        @if(auth()->user()->isAdmin())
+
                                         <form method="POST" action="{{route('practical-test.delete',$practicalTest->id)}}" class="ml-2">
                                             @csrf
                                             @method('DELETE')
@@ -345,6 +371,7 @@
                                         <a href="{{route('practical-test.edit',$practicalTest->id)}}" class="btn btn-info-gradient btn-icon mr-2">
                                             <i class="typcn typcn-edit"></i>
                                         </a>
+                                        @endif
 
                                         @if($practicalTest->status=='active')
                                             <span class="badge badge-pill badge-success mr-2">مفعل</span>

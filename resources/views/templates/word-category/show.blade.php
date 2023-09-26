@@ -3,7 +3,10 @@
 @section('content')
 @include('templates.components.session-messages')
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0 mb-4"><a href="{{route('card.create',$category->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء كرت جديد</a></div>
+        @endif
     </div>
     @if ($category->cards->count() == 0)
         <div class="card-body text-center">
@@ -47,29 +50,32 @@
                                                 </div>
                                                 <div class="panel-footer text-center">
                                                     <div class="row">
-                                                        <div class="col-md-4 mb-2">
-                                                           <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
-                                                               @csrf
-                                                               @method('DELETE')
-                                                               <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                                                   <i class="fa fa-trash"></i> حذف
-                                                               </button>
-                                                              </form>
+                                                        @if(auth()->user()->isAdmin())
+                                                            <div class="col-md-4 mb-2">
+                                                                <form method="POST" action="{{ route('card.delete', $card->id) }}" class="ml-2">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                                        <i class="fa fa-trash"></i> حذف
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <a class="btn btn-warning-gradient" href="{{ route('card.edit', $card->id) }}">
+                                                                    <i class="fa fa-edit"></i> تعديل
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                @livewire('favorite-button', ['cardId' => $card->id])
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-12 text-center mb-2 justify-content-center">
+                                                                @livewire('favorite-button', ['cardId' => $card->id])
+                                                            </div>
+                                                        @endif
 
-
-                                                        </div>
-                                                        <div class="col-md-4 mb-2">
-                                                            <a class="btn btn-warning-gradient" href="{{route('card.edit',$card->id)}}">
-                                                                <i class="fa fa-edit"></i> تعديل
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 mb-2">
-
-                                                            @livewire('favorite-button', ['cardId' => $card->id])
-
-                                                        </div>
                                                         @if ($card->isNew())
-                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
+                                                            <div class="badge bg-success-gradient text-white m-2">جديد</div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -105,28 +111,34 @@
                                                 </div>
                                                 <div class="panel-footer text-center">
                                                     <div class="row">
-                                                        <div class="col-md-4 mb-2">
-                                                            <form method="POST" action="{{route('card.delete',$card->id)}}" class="ml-2">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
-                                                                    <i class="fa fa-trash"></i> حذف
-                                                                </button>
-                                                            </form>
+                                                        @if(auth()->user()->isAdmin())
+                                                            <div class="col-md-4 mb-2">
+                                                                <form method="POST" action="{{ route('card.delete', $card->id) }}" class="ml-2">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="btn btn-danger-gradient" onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')">
+                                                                        <i class="fa fa-trash"></i> حذف
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <a class="btn btn-warning-gradient" href="{{ route('card.edit', $card->id) }}">
+                                                                    <i class="fa fa-edit"></i> تعديل
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                @livewire('favorite-button', ['cardId' => $card->id])
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-12 text-center mb-2 justify-content-center">
+                                                                @livewire('favorite-button', ['cardId' => $card->id])
+                                                            </div>
+                                                        @endif
 
-
-                                                        </div>
-                                                        <div class="col-md-4 mb-2">
-                                                            <a class="btn btn-warning-gradient" href="{{route('card.edit',$card->id)}}">
-                                                                <i class="fa fa-edit"></i> تعديل
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 mb-2">
-                                                            @livewire('favorite-button', ['cardId' => $card->id])
-                                                        </div>
                                                         @if ($card->isNew())
-                                                            <div class="badge bg-success-gradient text-white m-2 ">جديد</div>
-                                                        @endif</div>
+                                                            <div class="badge bg-success-gradient text-white m-2">جديد</div>
+                                                        @endif
+                                                    </div>
                                                 </div>
 
                                             </div>

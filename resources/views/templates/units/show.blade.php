@@ -7,7 +7,10 @@
 
 
     <div class="row row-xs wd-xl-80p">
+        @if(auth()->user()->isAdmin())
+
         <div class="col-sm-6 col-md-3 mg-t-10 mg-md-t-0"><a href="{{route('lesson.create',$unit->id)}}" class="btn btn-outline-indigo btn-rounded btn-block">إنشاء درس جديد</a></div>
+        @endif
     </div>
 
     <div class="row mt-4">
@@ -35,7 +38,9 @@
                                         <th class="wd-lg-8p"><span>وصف الدرس</span></th>
                                         <th class="wd-lg-20p"><span>تاريخ الإنشاء</span></th>
                                         <th class="wd-lg-20p"><span>الحالة</span></th>
+                                        @if(auth()->user()->isAdmin())
                                         <th class="wd-lg-20p">إجراء</th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -65,6 +70,8 @@
                                                 <td>
 
                                                     <div class="btn-icon-list">
+                                                        @if(auth()->user()->isAdmin())
+
                                                         <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
                                                             @csrf
                                                             @method('DELETE')
@@ -73,6 +80,7 @@
                                                         </form>
 
                                                         <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                        @endif
                                                     </div>
 
                                                 </td>
@@ -102,6 +110,8 @@
                                                     <td>
 
                                                         <div class="btn-icon-list">
+                                                            @if(auth()->user()->isAdmin())
+
                                                             <form method="POST" action="{{route('lesson.delete',$lesson->id)}}" class="ml-2">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -110,6 +120,7 @@
                                                             </form>
 
                                                             <a href="{{route('lesson.edit',$lesson->id)}}" class="btn btn-info-gradient btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                            @endif
                                                         </div>
 
                                                     </td>
