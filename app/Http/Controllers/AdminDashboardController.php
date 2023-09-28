@@ -41,12 +41,65 @@ class AdminDashboardController extends Controller
 
 
 
+        $plans = Plan::all();
+
+        $planCounts = [];
+
+        foreach ($plans as $plan) {
+            $planCounts[$plan->name] = $plan->countActiveUsers();
+        }
 
 
-
-        return view('templates/main', compact( 'chart1','users',
+        return view('templates.main-member', compact( 'chart1','users',
             'curriculums', 'levels','remainingTime',
-            'exams', 'units'));
+            'exams', 'units','planCounts'));
+    }
+
+    public function saveToken(Request $request)
+    {
+        auth()->user()->update(['device_token'=>$request->token]);
+        return response()->json(['token saved successfully.']);
+    }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function sendNotification(Request $request)
+    {
+        $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
+
+        $SERVER_API_KEY = 'AAAA30uP5u0:APA91bEsikVdaD3lLE_Zz3RI8aQNRGI9C40wf_b_P1dftHNg0dd5J3IEcndBvQj9gSIb_7OHsEnWsiKjYgyshMcG-qA03Na3ZMaqHHM-iLUKm8K26OBvhaFgId8RsfOkHMmQOQ_rFlEh';
+
+        $data = [
+            "registration_ids" => $firebaseToken,
+            "notification" => [
+                "title" => $request->title,
+                "body" => $request->body,
+                "content_available" => true,
+                "priority" => "high",
+            ]
+        ];
+        $dataString = json_encode($data);
+
+        $headers = [
+            'Authorization: key=' . $SERVER_API_KEY,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+        $response = curl_exec($ch);
+
+        dd($response);
     }
 
 }

@@ -14,6 +14,8 @@ class TestTaker extends Component
     public $userAnswers = [];
     public $correctCount = 0;
     public $showCorrectAnswers = false;
+    public $showModal = false;
+
 
     public function mount($test_id)
     {
@@ -50,6 +52,8 @@ class TestTaker extends Component
             }
         }
         $this->showCorrectAnswers = true;
+        $this->showModal = true;
+
     }
     public function deleteQuestion($index)
     {

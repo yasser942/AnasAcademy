@@ -21,4 +21,12 @@ class Plan extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('start_date', 'end_date');
     }
+// Plan.php
+
+    public function countActiveUsers()
+    {
+        return $this->users()
+            ->wherePivot('end_date', '>', now()) // Assuming 'end_date' is a column in the pivot table
+            ->count();
+    }
 }

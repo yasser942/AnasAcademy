@@ -314,25 +314,12 @@ $(function() {
 		resize: true,
 		labelColor:"#8c9fc3"
 	});
-	
-	new Morris.Donut({
-		element: 'morrisDonut2',
-		data: [{
-			label: 'Men',
-			value: 12
-		}, {
-			label: 'Women',
-			value: 30
-		}, {
-			label: 'Kids',
-			value: 20
-		}, {
-			label: 'Infant',
-			value: 25
-		}],
-		colors: ['#6d6ef3', '#285cf7', '#f7557a', '#74DE00'],
-		resize: true,
-		labelColor:"#8c9fc3"
-		
-	});
+
+    new Morris.Donut({
+        element: 'morrisDonut2',
+        data: donutData,
+        colors: ['#6d6ef3', '#285cf7', '#f7557a', '#74DE00', '#FF5733', '#8B008B'],
+        resize: true,
+        labelColor: "#8c9fc3"
+    });
 });

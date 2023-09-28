@@ -28,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password','role', 'status'
+        'name', 'email', 'password','role', 'status','device_token'
     ];
 
     /**
@@ -200,6 +200,14 @@ public  function isPlanExpired() : bool
     {
         return $this->hasRole('أدمن');
     }
+
+    /**
+     * Update the user's device token.
+     *
+     * @param string $deviceToken
+     * @return void
+     */
+
 
 
 }

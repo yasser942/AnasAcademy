@@ -57,7 +57,7 @@ Route::middleware([
 
 
 ])->group(function () {
-
+    Route::post('/save-token', [App\Http\Controllers\NotificationController::class, 'saveToken'])->name('save-token');
 
     Route::get('/dashboard', [AdminDashboardController::class ,'index'])->name('dashboard');
 

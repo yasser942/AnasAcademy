@@ -15,6 +15,8 @@ class ExamTaker extends Component
     public $userAnswers = [];
     public $correctCount = 0;
     public $showCorrectAnswers = false;
+    public $showModal = false;
+
 
     public function mount($exam_id)
     {
@@ -47,6 +49,8 @@ class ExamTaker extends Component
             }
         }
         $this->showCorrectAnswers = true;
+        $this->showModal = true;
+
     }
     public function deleteQuestion($index)
     {
@@ -61,6 +65,8 @@ class ExamTaker extends Component
         }
 
     }
+
+
     public function render()
     {
         return view('livewire.exam-taker');

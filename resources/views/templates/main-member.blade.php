@@ -92,5 +92,6 @@
 
     {!! $chart1->renderJs() !!}
 
+    @include('templates.components.notification')
 
 @endsection
