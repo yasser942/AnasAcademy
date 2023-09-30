@@ -4,7 +4,7 @@
 @section('content')
     @include('templates.components.validation-messages')
     <div class="card-body pt-0">
-        <form  method="POST" action="{{route('curriculum.store')}}">
+        <form  method="POST" action="{{route('curriculum.store')}}" enctype="multipart/form-data">
             @csrf
 
                 <div class="form-group">
@@ -32,7 +32,7 @@
                  <div >
                      <label for="Textarea">الرجاء إدراج صورة</label>
 
-                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200"  />
+                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200" name="image" required />
                  </div>
              </div>
 

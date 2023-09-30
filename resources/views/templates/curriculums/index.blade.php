@@ -34,8 +34,14 @@
                 @if($curriculum->status =='active')
                     <div class="col-xl-4 col-lg-4 col-md-12">
                         <div class="card">
-                            <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
-                            <div class="card-body">
+                            @if($curriculum->image)
+                                <img src="{{Storage::url('curriculums/'.$curriculum->image->filename)}}" alt="..." class="card-img">
+
+                            @else
+                                <img src="{{asset('assets/img/noimg.png')}}" alt="..." class="card-img">
+
+                            @endif
+                                <div class="card-body">
                                 <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
                                 <p class="card-text">{{$curriculum->description}}</p>
                                 <div class="btn-icon-list">
@@ -66,8 +72,13 @@
                     @if(auth()->user()->hasRole('أدمن'))
                         <div class="col-xl-4 col-lg-4 col-md-12">
                             <div class="card">
-                                <img class="card-img-top w-100" src="{{asset('assets/img/levels/cover.png')}}" alt="">
-                                <div class="card-body">
+                                @if($curriculum->image)
+                                    <img src="{{Storage::url('curriculums/'.$curriculum->image->filename)}}" alt="..." class="card-img">
+
+                                @else
+                                    <img src="{{asset('assets/img/noimg.png')}}" alt="..." class="card-img">
+
+                                @endif                                <div class="card-body">
                                     <a href="{{route('curriculum.show',$curriculum->id)}}"> <h4 class="card-title mb-3">{{$curriculum->name}}</h4></a>
                                     <p class="card-text">{{$curriculum->description}}</p>
                                     <div class="btn-icon-list">

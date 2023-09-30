@@ -25,6 +25,7 @@ class CreateCurriculumRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|in:active,passive',
+
         ];
     }
 }

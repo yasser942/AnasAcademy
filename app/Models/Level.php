@@ -21,6 +21,10 @@ class Level extends Model
     {
         return $this->hasMany(Unit::class);
     }
+    public  function image (){
+
+        return $this->morphOne(Image::class,'imageable');
+    }
     public function isNew()
     {
         return $this->created_at->greaterThanOrEqualTo(now()->subDays(7));

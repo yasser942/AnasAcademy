@@ -24,8 +24,13 @@
             @if($level->status =='active')
                     <div class="col-xl-4 col-lg-4 col-md-12">
                         <div class="card">
-                            <img class="card-img-top w-100" src="{{asset('assets/img/levels/a'.$loop->index.'.jpg')}}" alt="">
-                            <div class="card-body">
+                            @if($level->image)
+                                <img src="{{Storage::url('levels/'.$level->image->filename)}}" alt="..." class="card-img">
+
+                            @else
+                                <img src="{{asset('assets/img/noimg.png')}}" alt="..." class="card-img">
+
+                            @endif                            <div class="card-body">
                                 <a href="{{route('level.show',$level->id)}}"><h4 class="card-title mb-3">{{$level->name}}</h4></a>
                                 <p class="card-text">{{$level->description}}</p>
                                 <div class="btn-icon-list">
@@ -60,8 +65,14 @@
                 @if(auth()->user()->hasRole('أدمن'))
                         <div class="col-xl-4 col-lg-4 col-md-12">
                             <div class="card">
-                                <img class="card-img-top w-100" src="{{asset('assets/img/levels/a'.$loop->index.'.jpg')}}" alt="">
-                                <div class="card-body">
+                                @if($level->image)
+                                    <img src="{{Storage::url('levels/'.$level->image->filename)}}" alt="..." class="card-img">
+
+                                @else
+                                    <img src="{{asset('assets/img/noimg.png')}}" alt="..." class="card-img">
+
+                                @endif
+                                    <div class="card-body">
                                     <a href="{{route('level.show',$level->id)}}"><h4 class="card-title mb-3">{{$level->name}}</h4></a>
                                     <p class="card-text">{{$level->description}}</p>
                                     <div class="btn-icon-list">

@@ -92,6 +92,7 @@ class NotificationController extends Controller
 
         $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
+
         $SERVER_API_KEY = 'AAAA30uP5u0:APA91bEsikVdaD3lLE_Zz3RI8aQNRGI9C40wf_b_P1dftHNg0dd5J3IEcndBvQj9gSIb_7OHsEnWsiKjYgyshMcG-qA03Na3ZMaqHHM-iLUKm8K26OBvhaFgId8RsfOkHMmQOQ_rFlEh';
 
         $data = [

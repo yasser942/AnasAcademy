@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateLevelRequest;
 use App\Models\Curriculum;
 use App\Models\Level;
+use App\traits\UploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LevelController extends Controller
 {
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -31,20 +34,31 @@ class LevelController extends Controller
      */
     public function store(CreateLevelRequest $request)
     {
-        $data=$request->validated();
-        // Create a new Level instance and fill it with the data
-        $level = new Level();
-        $level->name = $data['name'];
-        $level->description = $data['description'];
-        $level->status = $data['status'];
-        $level->curriculum_id = $data['curriculum_id'];
+        DB::beginTransaction();
+        try{
+            $data=$request->validated();
+            // Create a new Level instance and fill it with the data
+            $level = new Level();
+            $level->name = $data['name'];
+            $level->description = $data['description'];
+            $level->status = $data['status'];
+            $level->curriculum_id = $data['curriculum_id'];
+            $this->verifyAndStoreImage($request,'image','levels','public',$level->id,'App\Models\Level','name');
 
-        // Save the new Level record
-        $level->save();
 
-        if ($level){
-            return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم اضافة المستوى بنجاح');
+            // Save the new Level record
+            $level->save();
+            DB::commit();
+
+            if ($level){
+                return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم اضافة المستوى بنجاح');
+            }
         }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+        }
+
     }
 
     /**

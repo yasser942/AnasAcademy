@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCurriculumRequest;
 use App\Models\Curriculum;
+use App\traits\UploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CurriculumController extends Controller
 {
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -30,13 +33,26 @@ class CurriculumController extends Controller
      */
     public function store(CreateCurriculumRequest $request)
     {
-        $data=$request->validated();
+       DB::beginTransaction();
+       try{
 
-        $curriculum=Curriculum::create($data);
+           $data=$request->validated();
 
-        if ($curriculum){
-            return redirect()->route('curriculum.index')->with('success','تم اضافة المنهج بنجاح');
-        }
+           $curriculum=Curriculum::create($data);
+           $this->verifyAndStoreImage($request,'image','curriculums','public',$curriculum->id,'App\Models\Curriculum','name');
+
+           DB::commit();
+           if ($curriculum){
+               return redirect()->route('curriculum.index')->with('success','تم اضافة المنهج بنجاح');
+           }
+
+       }
+         catch(\Exception $e){
+              DB::rollBack();
+              return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+            }
+
+
 
 
 
@@ -67,24 +83,51 @@ class CurriculumController extends Controller
      */
     public function update(CreateCurriculumRequest $request, string $id)
     {
-        $curriculum= curriculum::findOrFail($id);
-        $data=$request->validated();
-        $curriculum->update($data);
+        DB::beginTransaction();
+        try {
+            $curriculum= curriculum::findOrFail($id);
+            $data=$request->validated();
+            $curriculum->update($data);
+            if ($request->hasFile('image')){
+                if ($curriculum->image) {
+                    $this->Delete_attachment('public','curriculums/'.$curriculum->image->filename,$curriculum->id);
+                    $curriculum->image()->delete();
+                }
+                $this->verifyAndStoreImage($request,'image','curriculums','public',$curriculum->id,'App\Models\Curriculum','name');
+            }
 
-        return redirect()->route('curriculum.index')->with('success','تم تعديل المنهج بنجاح');
-    }
+            DB::commit();
+
+            return redirect()->route('curriculum.index')->with('success','تم تعديل المنهج بنجاح');
+
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+        }
+        }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $curriculum= curriculum::findOrFail($id);
-        if ($curriculum){
+        DB::beginTransaction();
+        try {
+            $curriculum= curriculum::findOrFail($id);
+            if ($curriculum){
+                $this->Delete_attachment('public','curriculums/'.$curriculum->image->filename,$curriculum->id);
+                $curriculum->delete();
+                DB::commit();
 
-            $curriculum->delete();
+                return redirect()->route('curriculum.index')->with('success','تم حذف المنهج بنجاح');
+            }
 
-            return redirect()->route('curriculum.index')->with('success','تم حذف المنهج بنجاح');
         }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+        }
+
     }
 }

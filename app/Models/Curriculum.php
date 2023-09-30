@@ -14,10 +14,16 @@ class Curriculum extends Model
         'name',
         'description',
         'status',
+        'image',
     ];
     public function levels()
     {
         return $this->hasMany(\App\Models\Level::class);
+    }
+
+    public  function image (){
+
+        return $this->morphOne(Image::class,'imageable');
     }
     public function isNew()
     {
