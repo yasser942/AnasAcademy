@@ -17,7 +17,7 @@
     <div class="row">
         @foreach($plans as $plan)
             @if($plan->name !='تجريبي' && $plan->name != "مفتوح")
-                @if(auth()->user()->currentPlan()->name==$plan->name)
+                @if(auth()->user()->currentPlan()!=null &&auth()->user()->currentPlan()->name==$plan->name)
                 <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-3">
                     <div class="panel price panel-color">
                         <div class="panel-heading bg-warning-gradient p-0 text-center">
