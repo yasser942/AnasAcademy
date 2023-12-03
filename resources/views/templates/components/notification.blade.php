@@ -44,7 +44,7 @@
                     },
                     dataType: 'JSON',
                     success: function (response) {
-                        alert('Token saved successfully.');
+                        //alert('Token saved successfully.');
                     },
                     error: function (err) {
                         console.log('User Chat Token Error'+ err);

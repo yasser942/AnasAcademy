@@ -35,8 +35,15 @@
             <div class="form-group">
                 <div >
                     <label for="Textarea">الرجاء إدراج صورة</label>
+                    @if($curriculum->image)
+                        <input type="file" class="dropify" data-default-file="{{Storage::url('curriculums/'.$curriculum->image->filename)}}" data-height="200"  name="image"  />
 
-                    <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200" name="image" required />
+
+                    @else
+                        <img src="{{asset('assets/img/noimg.png')}}" alt="..." class="card-img">
+
+                    @endif
+
                 </div>
             </div>
 

@@ -32,7 +32,7 @@
                  <div >
                      <label for="Textarea">الرجاء إدراج صورة</label>
 
-                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200" required name="image" />
+                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200"  name="image" />
                  </div>
              </div>
 
