@@ -43,11 +43,12 @@ class LevelController extends Controller
             $level->description = $data['description'];
             $level->status = $data['status'];
             $level->curriculum_id = $data['curriculum_id'];
-            $this->verifyAndStoreImage($request,'image','levels','public',$level->id,'App\Models\Level','name');
 
 
             // Save the new Level record
             $level->save();
+            $this->verifyAndStoreImage($request,'image','levels','public',$level->id,'App\Models\Level','name');
+
             DB::commit();
 
             if ($level){
@@ -84,19 +85,37 @@ class LevelController extends Controller
      */
     public function update(CreateLevelRequest $request, string $id)
     {
-        $data=$request->validated();
-        $level=Level::findOrFail($id);
-        $level->name = $data['name'];
-        $level->description = $data['description'];
-        $level->status = $data['status'];
-        $level->curriculum_id = $data['curriculum_id'];
+        DB::beginTransaction();
+        try{
+            $data=$request->validated();
+            $level=Level::findOrFail($id);
+            $level->name = $data['name'];
+            $level->description = $data['description'];
+            $level->status = $data['status'];
+            $level->curriculum_id = $data['curriculum_id'];
 
-        // Save the new Level record
-        $level->save();
-
-        if ($level){
-            return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم تعديل المستوى بنجاح');
+            // Save the new Level record
+            $level->save();
+            if ($request->hasFile('image')){
+                if ($level->image) {
+                    $this->Delete_attachment('public','levels/'.$level->image->filename,$level->id);
+                    $level->image()->delete();
+                }
+                $this->verifyAndStoreImage($request,'image','levels','public',$level->id,'App\Models\Level','name');
+            }
+            DB::commit();
+            if ($level){
+                return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم تعديل المستوى بنجاح');
+            }
         }
+
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+        }
+
+
+
     }
 
     /**
@@ -104,8 +123,20 @@ class LevelController extends Controller
      */
     public function destroy(string $id)
     {
-        $level=Level::findOrFail($id);
-        $level->delete();
-        return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم حذف المستوى بنجاح');
-    }
+        DB::beginTransaction();
+        try {
+            $level=Level::findOrFail($id);
+            if ($level){
+                $this->Delete_attachment('public','levels/'.$level->image->filename,$level->id);
+                $level->delete();
+                DB::commit();
+                return redirect()->route('curriculum.show',[$level->curriculum_id])->with('success','تم حذف المستوى بنجاح');
+            }
+
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
+        }
+        }
 }

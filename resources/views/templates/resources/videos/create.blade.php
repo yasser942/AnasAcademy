@@ -33,13 +33,7 @@
 
                     </select>
                 </div>
-             <div class="form-group">
-                 <div >
-                     <label for="Textarea">الرجاء إدراج صورة</label>
 
-                     <input type="file" class="dropify" data-default-file="../../assets/img/photos/1.jpg" data-height="200"  />
-                 </div>
-             </div>
 
             <button onclick="showLoader();" type="submit" class="btn btn-primary mt-3 mb-0">إنشاء المصدر</button>
 

@@ -37,7 +37,6 @@ class CurriculumController extends Controller
        try{
 
            $data=$request->validated();
-
            $curriculum=Curriculum::create($data);
            $this->verifyAndStoreImage($request,'image','curriculums','public',$curriculum->id,'App\Models\Curriculum','name');
 
@@ -51,11 +50,6 @@ class CurriculumController extends Controller
               DB::rollBack();
               return redirect()->back()->with('error','حدث خطا ما يرجى المحاولة لاحقا');
             }
-
-
-
-
-
 
     }
 
@@ -130,4 +124,5 @@ class CurriculumController extends Controller
         }
 
     }
+
 }

@@ -59,7 +59,7 @@ Route::middleware([
 ])->group(function () {
     Route::post('/save-token', [App\Http\Controllers\NotificationController::class, 'saveToken'])->name('save-token');
 
-    Route::get('/dashboard', [AdminDashboardController::class ,'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class ,'index'])->middleware('checkRole:أدمن')->name('dashboard');
 
     Route::prefix('user')->controller(UserController::class)->middleware('checkRole:أدمن')->group(function () {
         Route::get('/', 'index')->name('user.index');

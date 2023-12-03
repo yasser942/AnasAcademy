@@ -25,9 +25,11 @@
                             <p class="text-danger">الجواب الصحيح : {{ $question['options'][$question['options']['correct']] }}</p>
                         @endif
                     @endif
+                    @if(auth()->user()->isAdmin())
                     <div class="row "  >
                     <button  wire:click="deleteQuestion({{ $index }})" class="btn btn-danger">حذف السؤال</button>
                     </div>
+                    @endif
 
 
 

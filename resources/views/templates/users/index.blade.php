@@ -51,79 +51,84 @@
                                     </thead>
                                     <tbody>
                                     @foreach($users as $user)
-                                        <tr>
-                                            <td>
-                                                <img alt="avatar" class="rounded-circle avatar-md mr-2" src="{{ $user->profile_photo_url }}">
+                                    @if(!$user->isAdmin())
+                                    
+                                    <tr>
+                                        <td>
+                                            <img alt="avatar" class="rounded-circle avatar-md mr-2" src="{{ $user->profile_photo_url }}">
+                                        </td>
+
+                                        <td><a href="">{{$user->name}}</a></td>
+                                        @foreach($user->roles as $role)
+                                            <td>{{$role->name}}</td>
+
+                                        @endforeach
+                                        @if($user->status =='active')
+                                            <td class="text-center">
+                                                <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
                                             </td>
-
-                                            <td><a href="">{{$user->name}}</a></td>
-                                            @foreach($user->roles as $role)
-                                                <td>{{$role->name}}</td>
-
-                                            @endforeach
-                                            @if($user->status =='active')
-                                                <td class="text-center">
-                                                    <span class="label text-success d-flex"><div class="dot-label bg-success ml-1"></div>مفعل</span>
-                                                </td>
+                                        @else
+                                            <td class="text-center">
+                                                <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
+                                            </td>
+                                        @endif
+                                        <td>
+                                            @if($user->currentPlan())
+                                                {{$user->currentPlan()->name}}
                                             @else
-                                                <td class="text-center">
-                                                    <span class="label text-danger d-flex"><div class="dot-label bg-danger ml-1"></div>معطل</span>
-                                                </td>
+                                                <span class="label text-danger d-flex">لا يوجد</span>
                                             @endif
-                                            <td>
-                                                @if($user->currentPlan())
-                                                    {{$user->currentPlan()->name}}
-                                                @else
-                                                    <span class="label text-danger d-flex">لا يوجد</span>
-                                                @endif
 
-                                            </td>
-                                            <td>{{$user->remainingTime()}}</td>
-                                            <td>{{$user-> email}}</td>
-                                            <td>
-                                                {{$user->created_at->diffForHumans() }}
+                                        </td>
+                                        <td>{{$user->remainingTime()}}</td>
+                                        <td>{{$user-> email}}</td>
+                                        <td>
+                                            {{$user->created_at->diffForHumans() }}
 
-                                            </td>
-                                            <td>
-                                                <div class="btn-icon-list">
-                                                    <form method="POST" action="{{route('user.delete',$user->id)}}" class="ml-2">
-                                                        @csrf
-                                                        @method('DELETE')
+                                        </td>
+                                        <td>
+                                            <div class="btn-icon-list">
+                                                <form method="POST" action="{{route('user.delete',$user->id)}}" class="ml-2">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                        <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
-                                                    </form>
-                                                    <div class="dropdown ml-2">
-                                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-warning-gradient"
-                                                                data-toggle="dropdown" type="button">الحالة<i class="fas fa-caret-down ml-1"></i></button>
-                                                        <div class="dropdown-menu tx-13">
-                                                            @if($user->status === 'active')
-                                                                <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'deactivate']) }}">تعطيل</a>
-                                                            @else
-                                                                <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'activate']) }}">تفعيل</a>
-                                                            @endif
-                                                        </div>
+                                                    <button  class="btn btn-danger-gradient btn-icon"  onclick="return confirmDelete(this.form,'هل أنت متأكد من عملية الحذف ؟')"><i class="typcn typcn-trash"></i></button>
+                                                </form>
+                                                <div class="dropdown ml-2">
+                                                    <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-warning-gradient"
+                                                            data-toggle="dropdown" type="button">الحالة<i class="fas fa-caret-down ml-1"></i></button>
+                                                    <div class="dropdown-menu tx-13">
+                                                        @if($user->status === 'active')
+                                                            <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'deactivate']) }}">تعطيل</a>
+                                                        @else
+                                                            <a class="dropdown-item" href="{{ route('user.toggleStatus', [$user->id, 'activate']) }}">تفعيل</a>
+                                                        @endif
                                                     </div>
-
-
-
-                                                    <div class="dropdown">
-                                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info-gradient"
-                                                                data-toggle="dropdown" type="button">الخطط<i class="fas fa-caret-down ml-1"></i></button>
-                                                        <div class="dropdown-menu tx-13">
-                                                            @foreach($plans as $plan)
-                                                                <form method="POST" action="{{route('plan.assign-plan',['planId' => $plan->id,'userId' => $user->id])}}" >
-                                                                    @csrf
-
-                                                                    <button class="dropdown-item" onclick="return confirmDelete(this.form,'هل أنت متأكد من ذلك  ؟')" >{{$plan->name}}</button>
-                                                                </form>
-
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-
                                                 </div>
-                                            </td>
-                                        </tr>
+
+
+
+                                                <div class="dropdown">
+                                                    <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info-gradient"
+                                                            data-toggle="dropdown" type="button">الخطط<i class="fas fa-caret-down ml-1"></i></button>
+                                                    <div class="dropdown-menu tx-13">
+                                                        @foreach($plans as $plan)
+                                                            <form method="POST" action="{{route('plan.assign-plan',['planId' => $plan->id,'userId' => $user->id])}}" >
+                                                                @csrf
+
+                                                                <button class="dropdown-item" onclick="return confirmDelete(this.form,'هل أنت متأكد من ذلك  ؟')" >{{$plan->name}}</button>
+                                                            </form>
+
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif
+
+
                                     @endforeach
 
                                     </tbody>
